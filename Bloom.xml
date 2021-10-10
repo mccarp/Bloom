@@ -58,11 +58,13 @@ end</script>
 			</Trigger>
 			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>You died - Turn everything off</name>
-				<script>bl.echo("Oh no, you're dead. Turning everything off.")
-bl.active = false
-bl.inf.active = false
-bl.walker.active = false
-bl.walker.autowalker.enabled = false</script>
+				<script>if gmcp.Char.Vitals.hp == "0" and not string.find(getCurrentLine(), "your own delusions") then
+  bl.echo("Oh no, you're dead. Turning everything off.")
+  bl.active = false
+  bl.inf.active = false
+  bl.walker.active = false
+  bl.walker.autowalker.enabled = false
+end</script>
 				<triggerType>0</triggerType>
 				<conditonLineDelta>0</conditonLineDelta>
 				<mStayOpen>0</mStayOpen>
