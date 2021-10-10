@@ -4549,6 +4549,7 @@ function bl.walker.autowalker:move()
 --    display(bl.walker.autowalker.nextRoom)
 
     if getPath(mmp.currentroom, bl.walker.autowalker.nextRoom) then
+      mmp.speedWalk.type = "room"
       doSpeedWalk()
     else
       raiseEvent("mmapper failed path")
