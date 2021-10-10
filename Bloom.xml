@@ -1,0 +1,4785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<TriggerPackage>
+		<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+			<name>Bloom</name>
+			<script></script>
+			<triggerType>0</triggerType>
+			<conditonLineDelta>0</conditonLineDelta>
+			<mStayOpen>0</mStayOpen>
+			<mCommand></mCommand>
+			<packageName></packageName>
+			<mFgColor>#ff0000</mFgColor>
+			<mBgColor>#ffff00</mBgColor>
+			<mSoundFile></mSoundFile>
+			<colorTriggerFgColor>#000000</colorTriggerFgColor>
+			<colorTriggerBgColor>#000000</colorTriggerBgColor>
+			<regexCodeList />
+			<regexCodePropertyList />
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Prompt trigger</name>
+				<script>--[[
+This trigger is used both for some gags (gag everything until the previous prompt)
+And also for the fake prompt at the end of some menus, to make them look tidier.
+Checking if the line isn't nil or empty is to prevent weird bugs, which were encountered when
+in the NEWS system. It also displays things if the basher or influencer are active.
+]]
+if bl.active then
+  cecho(string.format("%s&lt;%sBash%s&gt; ", bl.c.bracket, bl.c.title, bl.c.bracket))
+end
+if bl.inf.active then
+  cecho(string.format("%s&lt;%sInf%s&gt; ", bl.c.bracket, bl.c.title, bl.c.bracket))
+end
+if bl.walker.active then
+  cecho(string.format("%s&lt;%sRun%s&gt; ", bl.c.bracket, bl.c.title, bl.c.bracket))
+end
+bl.lastPrompt = getLineNumber()
+local line = getCurrentLine()
+if line ~= "" and line ~= nil and not line:match("ERROR: invalid line number") then
+  bl.promptEcho = copy2decho()
+end</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string></string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>7</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>You died - Turn everything off</name>
+				<script>bl.echo("Oh no, you're dead. Turning everything off.")
+bl.active = false
+bl.inf.active = false
+bl.walker.active = false
+bl.walker.autowalker.enabled = false</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>You have been slain by </string>
+					<string>You fall to the ground as the last drops of life-giving blood drain out of your body.</string>
+					<string>The mortal threads of your being severed, you scream in agony as the Divine spark within you enfolds your body with scorching flames.</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>3</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Bashing</name>
+				<script></script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList />
+				<regexCodePropertyList />
+				<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Bloom resistance capture</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Grab resistances</name>
+						<script>--[[
+these resistance/weakness numbers were posted by an admin once. I think they're fairly accurate, but not 100% sure.
+
+]]
+local resistanceTable =
+  {
+    resistance =
+      {
+        trivial = .975,
+        mild = .925,
+        slight = .85,
+        moderate = .70,
+        great = .50,
+        enormous = .30,
+        supreme = .10,
+      },
+    weakness =
+      {
+        trivial = 1.025,
+        mild = 1.075,
+        slight = 1.15,
+        moderate = 1.30,
+        terrible = 1.50,
+        debilitating = 1.70,
+        crippling = 1.90,
+        fatal = 2,
+      },
+  }
+--some minor standardization of type names to BODYSCAN stuff.
+if matches.type == "electrical" then
+  matches.type = "electricity"
+elseif matches.type == "magic" then
+  matches.type = "magical"
+end
+if matches.vuln == "invulnerability" then
+  bl.newEntry[matches.type] = "0"
+else
+  bl.newEntry[matches.type] = ""..resistanceTable[matches.vuln][matches.level]
+end
+</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^(?:He|She|They) (?:has|have) an? (?&lt;level&gt;.+) (?&lt;vuln&gt;weakness|resistance) to (?&lt;type&gt;.+) damage\.$</string>
+							<string>^(?:He|She|They) (?:has|have) (?&lt;vuln&gt;invulnerability) to (?&lt;type&gt;.+) damage\.?</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Grab name</name>
+						<script>bl.newEntry.name=matches[2]
+if matches[1]:find("corpse") then
+	bl.newEntry.areas=","
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You cannot see what (.+) is holding\.$</string>
+							<string>^The corpse of (.+) is holding:$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Close capture</name>
+						<script>if not bl.debug then
+  bl.cleanup(bl.lastPrompt + 1, getLineNumber())
+end
+disableTrigger("Bloom resistance capture")
+if bl.newEntry.name ~= "" then
+  bl.newEntry.aliases = "," .. matches[2]:gsub(" ", "") .. ","
+  db:add(bldb.denizens, bl.newEntry)
+  bl.echo("Added " .. bl.newEntry.name .. " to the hunting database\n", true)
+  bl.room.rebuildTargets()
+else
+bl.echo("We weren't able to get the creature's name. Try increasing page length?")
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^It has the following aliases: (.+)\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Beast Stuff</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Bloom Beast Capture</name>
+						<script>moveCursorEnd()
+bl.beast.newEntry = {
+name = multimatches[1].name,
+id = multimatches[1].id,
+owner = multimatches[2].owner,
+abilities = {},
+startingline = getLineNumber()-3
+}</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>4</conditonLineDelta>
+						<mStayOpen>40</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^\| (?&lt;name&gt;[A-Za-z, ]+?) -+ #(?&lt;id&gt;\d+)\|$</string>
+							<string>| Sex    : </string>
+							<string>| Status : </string>
+							<string>^\| Fees   : .+Loyal To  : (?&lt;owner&gt;\w+) +\|$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>2</integer>
+							<integer>2</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Bloom Beast Ability Capture</name>
+							<script></script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>20</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>|------------------------------------------------------- TRAINED ABILITIES|</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+							</regexCodePropertyList>
+							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+								<name>Grab abilities</name>
+								<script>local ability = string.gsub(matches[2],"[()]","")
+table.insert(bl.beast.newEntry.abilities, ability)
+if matches[3] then
+  ability = string.gsub(matches[3],"[()]","")
+  table.insert(bl.beast.newEntry.abilities, ability)
+end</script>
+								<triggerType>0</triggerType>
+								<conditonLineDelta>0</conditonLineDelta>
+								<mStayOpen>0</mStayOpen>
+								<mCommand></mCommand>
+								<packageName></packageName>
+								<mFgColor>#ff0000</mFgColor>
+								<mBgColor>#ffff00</mBgColor>
+								<mSoundFile></mSoundFile>
+								<colorTriggerFgColor>#000000</colorTriggerFgColor>
+								<colorTriggerBgColor>#000000</colorTriggerBgColor>
+								<regexCodeList>
+									<string>^\| (.+?) {2,}(.+?)? {2,}\|$</string>
+								</regexCodeList>
+								<regexCodePropertyList>
+									<integer>1</integer>
+								</regexCodePropertyList>
+							</Trigger>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Close capture</name>
+							<script>setTriggerStayOpen("Bloom Beast Capture", 0)
+setTriggerStayOpen("Bloom Beast Ability Capture", 0)
+if bl.beast.gagnext and not bl.debug then
+  bl.cleanup(bl.beast.newEntry.startingline, getLineNumber())
+end
+bl.beast.gagnext = false
+bl.beast.newEntry.startingline = nil
+if bl.beast.newEntry.owner == gmcp.Char.Name.name then
+  bl.beast.list[bl.beast.newEntry.id] = bl.beast.newEntry
+  bl.beast.mapAttacks(bl.beast.newEntry.id)
+  bl.beast.checkForBeast()
+end
+
+bl.beast.newEntry = nil</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>1</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>|-------------------------------------------------------------------------|</string>
+								<string></string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+								<integer>7</integer>
+							</regexCodePropertyList>
+						</Trigger>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Check beast info</name>
+						<script>bl.beast.check()</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>trots in with head high, butting you gently with (his|her|their) head\.$</string>
+							<string>^You lead .+ out of a stall of .+\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>No beast around</name>
+						<script>if bl.beast.gagnext then
+  deleteFull()
+  bl.beast.gagnext = false
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>About which of your beasts do you want information?</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Bloom buffs capture</name>
+					<script>bl.buffs =
+  {
+    typeless = 1,
+    blunt = 1,
+    cutting = 1,
+    magical = 1,
+    fire = 1,
+    cold = 1,
+    poison = 1,
+    asphyxiation = 1,
+    electricity = 1,
+    psychic = 1,
+    excorable = 1,
+    divinus = 1,
+  }
+bl.buffStart = getLineNumber()</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>15</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>**************************[ Bodyscan - Buffs Brief ]***************************</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>3</integer>
+					</regexCodePropertyList>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Record buff value</name>
+						<script>if matches[2] ~= "Universal" then
+  bl.buffs[matches[2]:lower()] = 1 + .03 * tonumber(matches[3])
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^(\w+) +(-?\d+)$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Close buffs capture</name>
+						<script>setTriggerStayOpen("Bloom buffs capture",0)
+if bl.gagBuffs then
+  bl.gagBuffs = false
+  bl.cleanup(bl.buffStart,getLineNumber())
+end
+bl.buffsChecked = true
+bl.echo("Updated your buffs")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>*******************************************************************************</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</Trigger>
+			</TriggerGroup>
+			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Influencing</name>
+				<script></script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList />
+				<regexCodePropertyList />
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Influence worked</name>
+					<script>bl.inf.count = bl.inf.count + 1</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^.+ looks up into the sky, pretending you don't exist.</string>
+						<string>^.+ nods in agreement but avoids eye contact, looking somewhat embarrassed.$</string>
+						<string>^.+ eyes you up and down, then slaps you on the rump in an offensive manner.$</string>
+						<string>^.+ flexes (his|her|their) muscles and looks around, then shakes (his|her|their) head and laughs at you.$</string>
+						<string>^.+ face drops and s?he looks a little guilty, but shakes (his|her|their) head at you.$</string>
+						<string>^.+ laughs and blushes, giving you a friendly nudge.$</string>
+						<string>^.+ gives a dramatic sigh and politely edges away from you.$</string>
+						<string>^.+ blushes furiously and casually tries to move away from you.$</string>
+						<string>^.+ curtly informs you that s?he is not a walking bank.$</string>
+						<string>^.+ ponders your words, but then snorts arrogantly.$</string>
+						<string>^.+ puckers (his|her|their) brow in thought, but then waves a hand dismissively at you.$</string>
+						<string>^.+ begins to sweat profusely and looks about (him|her|them)self nervously, but then turns to you and disgustedly retorts, "Bah!"$</string>
+						<string>^.+ rubs (his|her|their) chin thoughtfully, but then gives you a rueful smile.$</string>
+						<string>^.+ trembles and a bead of sweat trickles down (his|hertheir) forehead, but then (she|he|they) gives? you a nervous laugh.$</string>
+						<string>^.+ grunts noncommittally, but (his|her|their) eyes scour your body as though it were a piece of meat on a butcher's block.$</string>
+						<string>^.+ raises an eyebrow at you in complete disbelief.$</string>
+						<string>^.+ blows you a kiss, as if that's what you asked for.</string>
+						<string>^.+ brushes (his|her|their) hair nervously, then smiles at you and strikes a charming pose.</string>
+						<string>^.+ laughs nervously at you, sweat beading on (his|her|their) forehead, but finally shakes (his|her|their) head in negation.</string>
+						<string>^.+ flutters (his|her|their) eyelashes at you, asking who could possibly harm someone with that beauty.$</string>
+						<string>^.+ asks you what type of celebrations and parties the .+ would expect if it were to follow the .+.$</string>
+						<string>^.+ asks you what\'s in it for (him|her|them) if the .+ were to follow the .+.$</string>
+						<string>^.+ snorts and tells you that the .+ can protect and take care of itself without the help of .+.$</string>
+						<string>^.+ smiles and tells you that the .+ may be a lovely place, but the .+ has no need of its services.</string>
+						<string>^.+ glares at you and demands to know what (his|her|their) position would be if the .+ were to follow .+.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Finished influencing</name>
+					<script>bl.inf.influenced[bl.room.influenceables[1].mob.id] = os.clock()
+table.remove(bl.room.influenceables, 1)
+if
+  (not bl.active or #bl.room.targets == 0) and
+  (not bl.inf.active or #bl.room.influenceables == 0) and
+  not mmp.autowalking
+then
+  raiseEvent("bloom room cleared")
+end
+bl.inf.count = 0</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^.+? crazy gleam enters .+? eyes as .+? vigorously agrees? with you that .+?\.$</string>
+						<string>^.+? is so caught up in admiring \w+self that \w+ barely notices? you\.$</string>
+						<string>^.+? sighs dramatically and searches .+? pockets\, looking for something to give you\.$</string>
+						<string>^.+? keeps asking \w+self why \w+ considered giving so much away\, and pays you no attention\.$</string>
+						<string>^.+? laughs uproariously at your amusing stories.+?$</string>
+						<string>^.+? brushes you off, apparently too tired to engage you in any meaningful dialogue\.$</string>
+						<string>^.+? doesn't even seem to notice you, as \w+ (is|are) lost thinking of \w+ friendship with you\.$</string>
+						<string>^.+? wraps an arm around you\, declaring you to be the truest of friends\.$</string>
+						<string>^.+? keeps thumping \w+self on the head\, not hearing a word you say\.$</string>
+						<string>^Apparently not hearing anything you said, .+? grabs you by the shoulders and demands to know if you are one of 'them'\.$</string>
+						<string>^.+? rolls \w+ eyes, mumbling about what \w+ can afford on \w+ meager pay\.$</string>
+						<string>^.+? tickles you, obviously amused by your antics\.$</string>
+						<string>^.+? doesn't even seem to notice your actions, as \w+ (is|are) lost daydreaming a future living with you\.$</string>
+						<string>^.+? says, "That sounds interesting, but I'm currently considering the .+?. Perhaps we can talk about it later?\"</string>
+						<string>^.+? says, "Actually, I am seriously considering the .+?, but I need time to think it over. Perhaps we can talk about it later\?"</string>
+						<string>^.+? snorts derisively and rebuffs your attention\.$</string>
+						<string>^.+? breaks down and sobs, telling you how true it is that \w+ (is|are) nothing but a pathetic fraud\.$</string>
+						<string>^.+? drops down on \w+ knees and worships the very ground you walk on!$</string>
+						<string>^.+ wildly looks around, \w+ left eye suddenly developing a nervous twitch, and asks you to keep a look out for 'them'\.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Bloom Influence Capture</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Uninfluenceable</name>
+						<script>bl.inf.newEntry.name = matches[2]
+deleteFull()</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^Don't you think it's a bit absurd trying to analyze (.+)\?$</string>
+							<string>^The strength of (.+)'s personality makes (?:him|her) impossible to analyze\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Analyze</name>
+						<script>local mindsetRef = {
+["possesses an intimidating demeanor"]="intimidating",
+["has a brave soul"]="brave",
+["displays a friendly disposition"]="friendly",
+["enjoys an extremely sensuous disposition"]="sensuous",
+["is a greedy bugger"]="greedy",
+}
+bl.inf.newEntry.mindset = mindsetRef[matches[3]]
+bl.inf.newEntry.name = matches[2]:lower()
+deleteFull()</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^(.+) (possesses an intimidating demeanor|has a brave soul|displays a friendly disposition|enjoys an extremely sensuous disposition|is a greedy bugger)\.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Close capture.</name>
+						<script>local weaknesses =
+  {
+    brave = "empowering",
+    friendly = "charity",
+    sensuous = "seduction",
+    greedy = "weakening",
+    intimidating = "paranoia",
+  }
+local immunities =
+  {
+    brave = "weakening",
+    friendly = "paranoia",
+    sensuous = "empowering",
+    greedy = "charity",
+    intimidating = "seduction",
+  }
+bl.cleanup(bl.lastPrompt, getLineNumber())
+entry = bl.inf.newEntry
+entry.alias = "," .. matches[2]:gsub(" ", "") .. ","
+disableTrigger("Bloom Influence Capture")
+if entry.mindset ~= "" and entry.name ~= "" then
+  if entry.preferred == "" or entry.preferred == immunities[entry.mindset] then
+    entry.preferred = weaknesses[entry.mindset]
+  end
+  db:add(bldb.influence, entry)
+  bl.echo("Added " .. entry.name .. " to the influencing database\n", true)
+  bl.room.rebuildTargets()
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^It has the following aliases: (.+)\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Influence oils</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Dragonsblood</name>
+						<script>bl.inf.oil = "dragonsblood"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>1</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You take out some dragonsblood oil and quickly rub it on your skin.</string>
+							<string>As you luxuriantly rub the resinous, red oil into your skin, you sniff abruptly and inhale the enticing aroma of dragon's blood.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Jasmine</name>
+						<script>bl.inf.oil = "jasmine"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>1</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You take out some jasmine oil and quickly rub it on your skin.</string>
+							<string>As you luxuriantly rub the golden oil into your skin, you sniff abruptly and inhale the sweet and floral odour of jasmine.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Musk</name>
+						<script>bl.inf.oil = "musk"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You take out some musk oil and quickly rub it on your skin.</string>
+							<string>As you luxuriantly rub the thick, purple oil into your skin, you sniff abruptly and inhale the pungent scent of musk.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Sandalwood</name>
+						<script>bl.inf.oil = "sandalwood"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You take out some sandalwood oil and quickly rub it on your skin.</string>
+							<string>As you luxuriantly rub the slippery, lutescent oil into your skin, you sniff abruptly and inhale the clean fragrance of sandalwood.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Vanilla</name>
+						<script>bl.inf.oil = "vanilla"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You take out some vanilla oil and quickly rub it on your skin.</string>
+							<string>As you luxuriantly rub the smooth, caramel coloured oil into your skin, you sniff abruptly and inhale the buttery redolence of vanilla.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Lost an oil</name>
+						<script>bl.inf.oil = "none"</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^The faint hint of (\w+?)(?: oil)? disappears and you find yourself no longer coated in it\.$</string>
+							<string>^Warm water showers down upon yourself, and you scrub all over until the (\w+) oil on your skin is gone\.$</string>
+							<string>^You begin to vigorously scrub yourself all over, trying to remove the (\w+) oil that coats your skin\.$</string>
+							<string>^\w+'s hands begin to glow with scalding warmth and (?:they|she|he) pass(?:es)? them over the surface of yourbody, removing the (\w+) oil covering you\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+			</TriggerGroup>
+			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Aff tracker</name>
+				<script></script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList />
+				<regexCodePropertyList />
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Slush</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Clumsiness</name>
+						<script>bl.affs.symptom("clumsiness")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>As you arrive, you trip over your own feet and fall on your face.</string>
+							<string>As you try to move, you manage to trip over your own legs and promptly fall on your face.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Stupidity</name>
+						<script>bl.affs.symptom("stupidity")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You drop to one knee, demonstrating your humility and respect.</string>
+							<string>Your mind is whirling with thoughts - you cannot settle down to sleep.</string>
+							<string>You yell, "I like cheese!"</string>
+							<string>^You yell, "\w+ (?:smells like a goat|is cute)!"$</string>
+							<string>You cannot kneel while you are on the floor!</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+							<integer>3</integer>
+							<integer>1</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Hallucinations</name>
+						<script>bl.affs.symptom("hallucinations")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Spiders are erupting from your mouth and nose!</string>
+							<string>You are stunned by the sight of a massive pink bunny hopping by.</string>
+							<string>You are stunned by a vision of divine astral beings.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Confusion</name>
+						<script>bl.affs.symptom("confusion")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your mind is too disrupted for transplanar travel.</string>
+							<string>You are too confused to concentrate properly.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Anorexia</name>
+						<script>bl.affs.symptom("anorexia")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The idea of putting something in your stomach sickens you.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Epilepsy</name>
+						<script>bl.affs.symptom("epilepsy")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your limbs begin to jerk and shake uncontrollably, and you begin to foam at the mouth.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Paranoia</name>
+						<script>bl.affs.symptom("paranoia")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Hatred burns in your eyes - you realise that your enemies are everywhere!</string>
+							<string>An ally is just someone pretending to like you, to make all the sweeter when they stab you in the back! Allies are for weaklings - you have no allies!</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Steam</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Pacifism</name>
+						<script>bl.affs.symptom("pacifism")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are feeling far too passive to do that.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Disloyalty</name>
+						<script>bl.affs.symptom("disloyalty")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You stand in such dishonour that not even your loyal friends will help you.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Deaf</name>
+						<script>bl.affs.symptom("deaf")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You see the mouth of .+ moving as if in speech, though you hear nothing\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Slickness</name>
+						<script>bl.affs.symptom("slickness")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The salve slides off your oily skin.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Healthleech</name>
+						<script>bl.affs.symptom("healthleech")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You watch helplessly as your lifeforce drains into \w+\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Manabarbs</name>
+						<script>bl.affs.symptom("manabarbs")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You hear an ominous sound, and a dull pain stab throbs throughout your head.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Egovice</name>
+						<script>bl.affs.symptom("egovice")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You hear strange whispers, and a sharp pain stabs you between the eyes.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Powerspikes</name>
+						<script>bl.affs.symptom("powerspikes")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You hear a dark thrumming, and pain wracks your entire being.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Jinx</name>
+						<script>bl.affs.symptom("jinx")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your limbs twitch of their own volition under the curse of the jinx, refusing to obey your commands.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Aeon</name>
+						<script>bl.affs.symptom("aeon")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You move sluggishly into action.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Dust</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Paralysis</name>
+						<script>bl.affs.symptom("paralysis")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are paralysed and cannot do that.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Haemophilia</name>
+						<script>bl.affs.symptom("haemophilia")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your blood refuses to clot.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Shivering</name>
+						<script>bl.affs.symptom("shivering")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You have a particularly intense shiver.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Frozen</name>
+						<script>bl.affs.symptom("frozen")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You begin moving your frozen body slowly</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>2</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Vomiting</name>
+						<script>bl.affs.symptom("vomiting")
+bl.affs.recklessCheck()</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You cannot contain the convulsions in your stomach any longer and double over, retching violently.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Dysentery</name>
+						<script>bl.affs.symptom("dysentery")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your bowels turn to water and are voided as you double over from a sharp pain in your stomach.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Powersap</name>
+						<script>bl.affs.symptom("powersap")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You gasp and shiver as you feel yourself losing control of your own power.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Relapsing</name>
+						<script>bl.affs.symptom("relapsing")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You swoon as you suffer a toxic relapse.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Blind</name>
+						<script>bl.affs.symptom("blind")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are blind and can see nothing but darkness.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Pox</name>
+						<script>bl.affs.symptom("pox")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Ugly sores break open upon your skin, seeping with a bloody yellow mucus.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Asthma</name>
+						<script>bl.affs.symptom("asthma")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your lungs are much too constricted to smoke.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Scabies</name>
+						<script>bl.affs.symptom("scabies")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A sudden itch drives you half-mad, and you scratch it furiously.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Ice</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Ablaze</name>
+						<script>bl.affs.symptom("ablaze")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Flames lick around you - you are on fire!</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Crushedchest</name>
+						<script>bl.affs.symptom("crushedchest")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A wave of pain radiating from your crushed chest robs you of focus.</string>
+							<string>Your crushed chest increases your sensitivity to bruises.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Internalbleeding</name>
+						<script>bl.affs.symptom("internalbleeding")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The bleeding in your gut seems to flow faster.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Damagedthroat</name>
+						<script>bl.affs.symptom("damagedthroat")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your throat is too damaged to swallow.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Collapsedlung</name>
+						<script>bl.affs.symptom("collapsedlung")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your inability to breathe leads to a hypoxia-induced blackout.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Writhe</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Entangled</name>
+						<script>bl.affs.symptom("entangled")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Tight bindings prevent you from moving.</string>
+							<string>Tight bindings cling to you, making that impossible.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Gored</name>
+						<script>bl.affs.symptom("gored")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^Your health continues to drain away as your impaled body shudders on the end of \w+'s antlers\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Impaled</name>
+						<script>if not bl.affs.affs.gored or bl.affs.affs.crucified then
+  bl.affs.symptom("impaled")
+end</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are impaled, which makes movement impossible.</string>
+							<string>You are impaled and must writhe off before you may do that.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Grapple</name>
+						<script>bl.affs.symptom("grapple")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You are grappled by \w+\. You must writhe to escape\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Transfixed</name>
+						<script>bl.affs.symptom("transfixed")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are transfixed and cannot move.</string>
+							<string>You are transfixed and cannot do that. You must writhe to escape.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>ClampedArm</name>
+						<script>bl.affs.symptom("clamped"..matches[2].."arm")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^The mutt hanging off your (left|right) arm keeps you from moving\.$</string>
+							<string>^You almost lose your balance as .+ viciously shakes your (left|right) arm, tearing your flesh and causing massive bleeding\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Timed</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Succumb</name>
+						<script>bl.affs.symptom("succumb")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A silver light weighs upon you, draining your mental energies.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Stun</name>
+						<script>bl.affs.symptom("stun")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are too stunned to be able to do anything.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Herbbane</name>
+						<script>bl.affs.symptom("herbbane")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A wafer of purity dust turns to ash in your mouth, and you spit it out.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Bentaura</name>
+						<script>bl.affs.symptom("bentaura")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Your bent aura causes a new affliction to manifest.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Hypnoticpattern</name>
+						<script>bl.affs.symptom("hypnoticpattern")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Glowing lights swirl around you in a slow, graceful dance of hypnotic patterns, disrupting your concentration.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Rainbowpattern</name>
+						<script>bl.affs.symptom("rainbowpattern")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Blood drips from your nose as the rainbow lights swirl around you in a maddening frenzy.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Mark of whatnot</name>
+						<script>bl.affs.symptom(matches[2]:lower().."mark")
+</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You feel the Mark of (Despair|Corruption|Darkness|Pain|Damnation) claw at your soul\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Timeechoes</name>
+						<script>bl.affs.symptom("timeechoes")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You suddenly relive events that happened just moments ago.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Chronicloop cured</name>
+						<script>bl.affs.cured("chronicloop")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The time looping around you spins faster and faster before imploding in on you. You find yourself reliving moments that just passed again.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Misc afflictions</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Fear</name>
+						<script>bl.affs.symptom("fear")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You rush about in a state of utter panic.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Sleep</name>
+						<script>bl.affs.symptom("sleep")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are asleep and can do nothing. WAKE will attempt to wake you.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Sprawled</name>
+						<script>bl.affs.symptom("sprawled")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You must first stand up before you can do that.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Mucus</name>
+						<script>bl.affs.symptom("mucus")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A puddle of slimy mucus forms under your feet, causing you to slip and fall.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Non-GMCP affs</name>
+					<script></script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList />
+					<regexCodePropertyList />
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Bloom diagnose</name>
+						<script></script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>99</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>You are:</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Muddy</name>
+							<script>bl.affs.diagAff("muddy")</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>covered in sticky mud.</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Earache</name>
+							<script>bl.affs.diagAff("earache")</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>suffering from the effects of blank note.</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Perfect fifth</name>
+							<script>bl.affs.diagAff("attraction-"..matches[2])</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>attracted to (\w+)\.$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Afterimage</name>
+							<script>bl.affs.diagAff("afterimage")</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>suffering from a dazzling afterimage.</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>close diagnose trigger</name>
+							<script>setTriggerStayOpen("Bloom diagnose",0)
+bl.affs.diagEnd()</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string></string>
+								<string>^You have \d+ afflictions\.$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>7</integer>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Afterimage</name>
+						<script>bl.affs.symptom("afterimage")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>A dazzling orange afterimage burns into your sight.</string>
+							<string>Dazzling lights flash across your vision, leaving you with naught but a fading orange afterimage.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Afterimage cured</name>
+						<script>bl.affs.cured("afterimage")
+bl.affs.printStamp("afterimage")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The dazzling afterimage fades from your vision.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Muddy</name>
+						<script>bl.affs.symptom("muddy")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The mud covering you slows your movement.</string>
+							<string>You are caught in the onslaught and go down in a wave of rolling mud.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Muddy cured</name>
+						<script>bl.affs.cured("muddy")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Warm water showers down upon yourself, and you scrub under your armpits trying to wash away that awful mud caked all over your body.</string>
+							<string>The rains sluice across your body, washing off the caked mud covering you.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Mark of whatnot cured</name>
+						<script>local affname = matches[2]:lower().."mark"
+bl.affs.cured(affname)
+bl.affs.printStamp(affname)</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^The Mark of (Despair|Corruption|Darkness|Pain|Damnation) fades away as the laughter of (\w+) echoes eerily in your mind\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Earache</name>
+						<script>bl.affs.symptom("earache")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>ou cry out as your deaf ears open up to the sound of a high-pitched note\.$</string>
+							<string>The ache in your ear canals suddenly intensifies, leaving you with nothing but a splitting headache.</string>
+							<string>^The lyrical sound invokes a strange longing for (\w+)\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>3</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Earache cured</name>
+						<script>bl.affs.cured("earache")
+bl.affs.printStamp("earache")</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The ache in your ear canals clears up.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Perfect fifth</name>
+						<script>bl.affs.symptom("attraction-"..matches[2])</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^The lyrical sound invokes a strange longing for (\w+)\.$</string>
+							<string>^You find you cannot bear to part from (\w+)\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Perfect fifth cured</name>
+						<script>bl.affs.cured("attraction-"..matches[2])</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>^You lose your attraction to (\w+)\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Princess farewell</name>
+						<script>bl.affs.symptom("echoes")
+--note: as this blacks out too, you don't get gmcp message unless under the effects of blacktea, requiring </script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>Filled with a haunting sorrow and unlimited love, an excruciatingly beautiful note brings tears to your eyes and a lump to your throat. Time slows and momentarily a vision fills your eyes of a goddess floating over an ancient pool with tears streaming down her face.</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+						</regexCodePropertyList>
+					</Trigger>
+				</TriggerGroup>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Print timestamps on aff lines</name>
+					<script>bl.affs.printStamp(matches[2])
+--bl.affs.cured(matches[2])</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^You have cured (\w+)\.$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+			</TriggerGroup>
+			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>Runner</name>
+				<script></script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList />
+				<regexCodePropertyList />
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Pulled into a pit</name>
+					<script>if bl.walker.active and mmp.autowalking then
+      mmp.stop()
+      bl.act()
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>A pair of muscular arms bursts forth from the mound of sand and, grabbing hold of your ankles, pulls you down into a pit.</string>
+						<string>The nearby mound of snow suddenly explodes, a corpse-blue arm bursting through and immediately darting for your leg. You cannot help but scream as fetid, rotten fingers and festering, broken, jagged nails dig into your leg and quickly pull you beneath the ice...</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>3</integer>
+						<integer>3</integer>
+					</regexCodePropertyList>
+				</Trigger>
+			</TriggerGroup>
+		</TriggerGroup>
+	</TriggerPackage>
+	<TimerPackage />
+	<AliasPackage>
+		<AliasGroup isActive="yes" isFolder="yes">
+			<name>Bloom</name>
+			<script></script>
+			<command></command>
+			<packageName></packageName>
+			<regex></regex>
+			<Alias isActive="yes" isFolder="no">
+				<name>Bloom help</name>
+				<script>bl.help()</script>
+				<command></command>
+				<packageName></packageName>
+				<regex>(?i)^bloom( help)?$</regex>
+			</Alias>
+			<AliasGroup isActive="yes" isFolder="yes">
+				<name>Bashing</name>
+				<script></script>
+				<command></command>
+				<packageName></packageName>
+				<regex></regex>
+				<Alias isActive="yes" isFolder="no">
+					<name>Review target lists</name>
+					<script>if matches[2] and matches[2]:lower() == "local" then
+  bl.reviewTargets(gmcp.Room.Info.area, true)
+else
+  bl.reviewTargets(matches[2])
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom review(?: (\w+))?$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Add a target to the system.</name>
+					<script>--[[
+This alias adds something to the system.
+bloom add &lt;whatever&gt; [prio #]
+priority optional, can be used to immediately set it to something other than 1 when adding a critter.
+needs to probe the mob to add it. works on corpses. can accept things like 'blah here' or 0.thing just fine.
+]]
+
+
+enableTrigger("Bloom resistance capture")
+disableTimer = tempTimer(3, function() disableTrigger("Bloom resistance capture") end)
+bl.newEntry =
+  {
+    areas = "," .. gmcp.Room.Info.area .. ",",
+    name = "",
+    blunt = 1,
+    cutting = 1,
+    magical = 1,
+    cold = 1,
+    psychic = 1,
+    asphyxiation = 1,
+    poison = 1,
+    electricity = 1,
+    fire = 1,
+    divinus = 1,
+    excorable = 1,
+    typeless = 1,
+    aliases = "",
+    aliastarget = "true",
+    active = "true",
+    prio = tonumber(matches[3]) or 1,
+  }
+send("probe "..matches[2],false)</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom add (.+?)(?: prio (\d+))?$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Add or remove an Alias</name>
+					<script>if matches[3]:lower() == "add" then
+  db:add(bldb.aliases, {alias = matches[2]:lower()})
+  bl.echo("Added "..matches[2]:title().." as an alias.")
+else
+  db:delete(bldb.aliases, db:eq(bldb.aliases.alias, matches[2]:lower()))
+  bl.echo("Removed "..matches[2]:title().." as an alias.")
+end
+bl.fakePrompt()</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom alias (\w+) (add|remove)$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Bloom Alias List</name>
+					<script>bl.listAliases()</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom alias list$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Turn auto-bashing on or off.</name>
+					<script>if matches[2]:lower() == "on" then
+  bl.echo("Bashing active!  ")
+  bl.fakePrompt()
+  bl.active = true
+  if not bl.buffsChecked and bl.whenToCheckBuffs == "bashing on" then
+    bl.checkBuffs()
+  else
+    bl.act()
+  end
+else
+  bl.echo("Bashing deactivated!  ")
+  bl.fakePrompt()
+  bl.active = false
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom (on|off)$</regex>
+				</Alias>
+			</AliasGroup>
+			<AliasGroup isActive="yes" isFolder="yes">
+				<name>Influencing</name>
+				<script></script>
+				<command></command>
+				<packageName></packageName>
+				<regex></regex>
+				<Alias isActive="yes" isFolder="no">
+					<name>Influence review</name>
+					<script>if matches[2] and matches[2]:lower() == "local" then
+  bl.inf.review(gmcp.Room.Info.area, true)
+else
+  bl.inf.review(matches[2])
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom inf review(?: (\w+))?$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Add an influenceable.</name>
+					<script>bl.send("analyze "..matches[2])
+bl.send("probe "..matches[2])
+enableTrigger("Bloom Influence Capture")
+bl.inf.newEntry = {
+	areas = ","..gmcp.Room.Info.area..",",
+	name = "",
+	active = "true",
+	alias = "",
+	mindset = "",
+	preferred = matches[3] or "",
+}</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom inf add (.+?)(?: (empowering|charity|seduction|weakening|paranoia))?$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Clear influenced table</name>
+					<script>bl.inf.influenced = {}</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom inf clear$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>toggle Influencing.</name>
+					<script>if matches[2]:lower() == "on" then
+  bl.echo("Influencing Active!  ")
+  bl.fakePrompt()
+  bl.inf.active = true
+  if bl.inf.hasAura then
+    bl.send("Charismaticaura on")
+  end
+  bl.act()
+else
+  bl.echo("Influencing deactivated!  ")
+  bl.fakePrompt()
+  bl.inf.active = false
+  if bl.inf.hasAura then
+    bl.send("Charismaticaura off")
+  end
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom inf (on|off)$</regex>
+				</Alias>
+			</AliasGroup>
+			<AliasGroup isActive="yes" isFolder="yes">
+				<name>Bloom walker</name>
+				<script></script>
+				<command></command>
+				<packageName></packageName>
+				<regex></regex>
+				<Alias isActive="yes" isFolder="no">
+					<name>Run an area</name>
+					<script>bl.walker.run(matches[2])</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom run(?: (\w+))?$</regex>
+				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Bloom stop</name>
+					<script>bl.walker.stop()</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom stop$</regex>
+				</Alias>
+			</AliasGroup>
+		</AliasGroup>
+	</AliasPackage>
+	<ActionPackage />
+	<ScriptPackage>
+		<ScriptGroup isActive="yes" isFolder="yes">
+			<name>Bloom</name>
+			<packageName></packageName>
+			<script></script>
+			<eventHandlerList />
+			<Script isActive="yes" isFolder="no">
+				<name>Bloom Config</name>
+				<packageName></packageName>
+				<script>bl = bl or {}
+bl.inf = bl.inf or {}
+--[[
+table of attacks. I want to have a fancier way to input them, but for now.. hardcoding!
+Example entry.
+["fire 334813 %s"] = {fire = .5, magical = .5},
+ ^ command^           ^damage types^
+The %s goes where the target would be in the attack.
+Can have any number of damage types for an attack, but they should reflect the actual typing.
+Sum of the decimals should add up to 1, or if an attack has lower or higher base damage, can adjust it:
+a newbie kick, for example, might be something like {blunt = .3} for damage types.
+This doesn't really have any support for multi-weapon attacks like warriors who swing twice (but kata should work fine.)
+If you're in that situation, I recommend a gnomeweapon.
+]]
+
+
+bl.attacks =
+  {
+    ["fire 334813 %s"] = {fire = 1},
+    ["fire 417607 %s"] = {magical = 1},
+    ["fire 219577 %s"] = {divinus = 1},
+  }
+  
+--simple toggle for whether or not to automatically use influence oils
+
+bl.inf.autoOil = true
+
+
+--when to check buffs. options are "login", "bashing on", or "never"
+bl.whenToCheckBuffs = "login"</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>Bloom core</name>
+				<packageName></packageName>
+				<script>bl = bl or {}
+--can be manually set for a better look under the hood. not used too extensively, though.
+bl.debug = bl.debug
+--call this instead of just echoing a \n for more consistent echoes - no more blank lines!
+
+function bl.newLine()
+  moveCursorEnd()
+  if getCurrentLine() ~= "" then
+    echo("\n")
+    moveCursorEnd()
+  end
+end
+
+--standard system echo
+
+function bl.echo(text)
+  bl.newLine()
+  cecho(
+    string.format("%s[%sBloom%s]:%s %s", bl.c.bracket, bl.c.title, bl.c.bracket, bl.c.text, text)
+  )
+end
+
+--debug echo
+
+function bl.decho(text)
+  if bl.debug then
+    bl.newLine()
+    cecho(
+      string.format("%s[%sBloom%s]:%s %s", bl.c.bracket, bl.c.title, bl.c.bracket, bl.c.debug, text)
+    )
+  end
+end
+
+--reprints the last prompt.
+
+function bl.fakePrompt()
+  bl.newLine()
+  decho(bl.promptEcho)
+  moveCursorEnd()
+  bl.lastPrompt = getLineNumber()
+end
+
+--bulk gag function, used for hiding probes and system menus
+
+function bl.cleanup(start, stop)
+  for i = stop, start, -1 do
+    moveCursor(0, i)
+    deleteLine()
+  end
+  echo("")
+end
+
+--wrap the send in pretty colors!
+
+function bl.send(command)
+  cecho(string.format("%s[%s%s%s]", bl.c.bracket, bl.c.title, command, bl.c.bracket))
+  send(command, false)
+end</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>Bloom help</name>
+				<packageName></packageName>
+				<script>function bl.help()
+local titleString = [[c1              c2 _______     .---.       ,-----.        ,-----.    ,---.    ,---. c1              
+c1      _       c2\  ____  \   | c1,_c2|     .'  c1.-,c2  '.    .'  c1.-,c2  '.  |    \  /    | c1      _       
+c1  _ (`-`) _   c2| |    \ | c1,-./  )c2    / c1,-.|  \ _c2 \  / c1,-.|  \ _c2 \ |  ,  \/  ,  | c1  _ (`-`) _   
+c1/` '.\ /.' `\ c2| |____/ / c1\  '_ '`)c2 ;  c1\  '_ /  |c2 :;  c1\  '_ /  |c2 :|  |\c1_c2   /|  | c1/` '.\ /.' `\ 
+c1``'-.,=,.-'`` c2|   c1_ _c2 '.  c1&gt; (_)  )c2 |  c1_`,/ \ _/c2  ||  c1_`,/ \ _/c2  ||  c1_( )_c2/ |  | c1``'-.,=,.-'`` 
+c1  .'//v\\'.   c2|  c1( ' )c2  \c1(  .  .-'c2 : c1(  '\_/ \c2   ;: c1(  '\_/ \c2   ;| c1(_ o _)c2 |  | c1  .'//v\\'.   
+c1 (_/\ " /\_)  c2| c1(_{;}_)c2 | c1`-'`-'c2|___\ c1`"/  \  )c2 /  \ c1`"/  \  )c2 / |  c1(_,_)c2  |  | c1 (_/\ " /\_)  c2
+c1     '-'      c2|  c1(_,_)c2  /  |        \'. c1\_/``"c2.'    '. c1\_/``"c2.'  |  |      |  | c1     '-'      
+c1              c2/_______.'   `--------`  '-----'        '-----'    '--'      '--' ]]
+titleString = string.gsub(titleString, "c1", "&lt;violet&gt;")
+titleString = string.gsub(titleString, "c2", "&lt;lawn_green&gt;")
+cecho(titleString)
+cecho(bl.c.border.."("..string.rep("=",91)..")")
+
+local bashingTitle = bl.c.title..[[
+
+ _   _             _   _                _    _ _                     
+| | | |_   _ _ __ | |_(_)_ __   __ _   / \  | (_) __ _ ___  ___  ___ 
+| |_| | | | | '_ \| __| | '_ \ / _` | / _ \ | | |/ _` / __|/ _ \/ __|
+|  _  | |_| | | | | |_| | | | | (_| |/ ___ \| | | (_| \__ \  __/\__ \
+|_| |_|\__,_|_| |_|\__|_|_| |_|\__, /_/   \_\_|_|\__,_|___/\___||___/
+                               |___/                                 
+]]
+cecho(bashingTitle)
+local bashingAliases = [[
+BLOOM (ON|OFF) : Toggle bashing. To set your attacks, edit the 'Bloom Config' script.
+
+BLOOM ADD &lt;target&gt; [PRIO &lt;#&gt;] : probes a denizen or corpse and adds them to the hunting database
+BLOOM REVIEW [LOCAL|&lt;search&gt;] : Reviews and adjust the target list
+BLOOM ALIAS &lt;alias&gt; (ADD|REMOVE) : adds or removes an alias from the alias whitelist
+BLOOM ALIAS LIST : displays all of the available hunting aliases
+]]
+cecho(bl.c.text..bashingAliases)
+
+local influenceTitle = [[
+ ___        __ _                              _    _ _                     
+|_ _|_ __  / _| |_   _  ___ _ __   ___ ___   / \  | (_) __ _ ___  ___  ___ 
+ | || '_ \| |_| | | | |/ _ \ '_ \ / __/ _ \ / _ \ | | |/ _` / __|/ _ \/ __|
+ | || | | |  _| | |_| |  __/ | | | (_|  __// ___ \| | | (_| \__ \  __/\__ \
+|___|_| |_|_| |_|\__,_|\___|_| |_|\___\___/_/   \_\_|_|\__,_|___/\___||___/
+
+]]
+cecho(bl.c.title..influenceTitle)
+local influenceAliases = [[
+BLOOM INF (ON|OFF) : Toggle Influencing
+
+BLOOM INF ADD &lt;target&gt; [EMPOWERING|CHARITY|SEDUCTION|WEAKENING|PARANOIA] : Add an influencing target
+BLOOM INF REVIEW [LOCAL|&lt;search&gt;] : Review and adjust the list of influencing targets.
+BLOOM INF CLEAR : Reset the table of influenced mobs if something goes wrong.
+]]
+
+cecho(bl.c.text..influenceAliases)
+
+local otherTitle = [[
+  ___  _   _                _    _ _                     
+ / _ \| |_| |__   ___ _ __ / \  | (_) __ _ ___  ___  ___ 
+| | | | __| '_ \ / _ \ '__/ _ \ | | |/ _` / __|/ _ \/ __|
+| |_| | |_| | | |  __/ | / ___ \| | | (_| \__ \  __/\__ \
+ \___/ \__|_| |_|\___|_|/_/   \_\_|_|\__,_|___/\___||___/
+]]
+cecho(bl.c.title..otherTitle)
+
+local otherAliases = [[
+
+BLOOM RUN [&lt;path&gt;] : Run through the local area, or through a stored path.
+                     Paths are stored in an internal script, as an unordered
+                     List of rooms
+
+BLOOM RUN STOP : Cancel the run
+
+BLOOM [HELP] : Bring up this menu.
+]]
+cecho(bl.c.text..otherAliases)
+bl.fakePrompt()
+end</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>Colors</name>
+				<packageName></packageName>
+				<script>--easily change system colors here
+bl.c = {
+bracket = "&lt;lawn_green&gt;",
+title = "&lt;medium_orchid&gt;",
+text = "&lt;turquoise&gt;",
+debug = "&lt;orange_red&gt;",
+border = "&lt;dark_green&gt;",
+x = "&lt;red&gt;",
+off = "&lt;tan&gt;",
+on = "&lt;deep_sky_blue&gt;",
+}</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>Database</name>
+				<packageName></packageName>
+				<script>--the database schema for stuff. Changing this could really break stuff.
+bl = bl or {}
+bldb =
+  db:create(
+    "bldb",
+    {
+      denizens =
+        {
+          name = "",
+          blunt = 1,
+          cutting = 1,
+          magical = 1,
+          cold = 1,
+          psychic = 1,
+          asphyxiation = 1,
+          poison = 1,
+          electricity = 1,
+          fire = 1,
+          divinus = 1,
+          excorable = 1,
+          typeless = 1,
+          aliases = "",
+          aliastarget = "true",
+          areas = ",",
+          _unique = {"name"},
+          _violations = "REPLACE",
+          active = "true",
+          prio = 1,
+        },
+      aliases = {alias = "", _unique = {"alias"}, _violations = "REPLACE"},
+      influence =
+        {
+          name = "",
+          active = "true",
+          _unique = {"name"},
+          _violations = "REPLACE",
+          mindset = "",
+          preferred = "",
+          alias = "",
+          areas = ",",
+        },
+    }
+  )</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>Stuff to do on login/connection</name>
+				<packageName></packageName>
+				<script>bl = bl or {}
+
+function bl.login()
+sendGMCP('Char.Skills.Get {"group":"influence"}')
+sendGMCP("Char.Items.Inv")
+bl.beast.check()
+if bl.whenToCheckBuffs == "login" then
+  bl.checkBuffs()
+end
+bl.inf.oil = "none"
+end
+
+registerAnonymousEventHandler("gmcp.Char.Name", "bl.login")</script>
+				<eventHandlerList />
+			</Script>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>GMCP</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Balance handler</name>
+					<packageName></packageName>
+					<script>bl.bal = bl.bal or {}
+--some pared down code yoinked from my hodgepodge system
+--standing/prone is handled as a balance due to being carried on gmcp.Char.Vitals.
+--doing this fixed some oddities/bugs from other approaches.
+bl.bal.bals =
+  bl.bal.bals or
+  {
+    balance = true,
+    equilibrium = true,
+    psiid = true,
+    psisuper = true,
+    psisub = true,
+    left_arm = true,
+    right_arm = true,
+    left_leg = true,
+    right_leg = true,
+    standing = true,
+  }
+--helper function to check if you have every balance that the system tracks.
+
+local function allTrue(tab)
+  for k, v in pairs(tab) do
+    if not v then
+      return false
+    end
+  end
+  return true
+end
+
+--while this is basically a wrapper for allTrue now, used to have more checks.
+--retained so that more checks can be added in if needed - might add bl.affs.stuff to this directly?
+
+function bl.bal.canAct()
+  if allTrue(bl.bal.bals) then
+    return true
+  else
+    return false
+  end
+end
+
+--this is the core of the balance racker.
+
+function bl.bal.updateBals()
+  --copy current balances to the oldbals table to compare later.
+  local oldbals = table.deepcopy(bl.bal.bals)
+  --convert all the gmcp bals into booleans and write them to the table.
+  for bal, value in pairs(bl.bal.bals) do
+    if gmcp.Char.Vitals[bal] then
+      bl.bal.bals[bal] = gmcp.Char.Vitals[bal] ~= "0"
+    end
+  end
+  --invert the prone vitals, and have it as standing. Makes other logic easier.
+  bl.bal.bals.standing = gmcp.Char.Vitals.prone ~= "1"
+  --now we compare old and new balances to see what has changed.
+  local regainedBalances = false
+  for bal, val in pairs(bl.bal.bals) do
+    if oldbals[bal] and not val then
+      bl.decho("balance debug: " .. bal .. " lost!")
+    elseif val and not oldbals[bal] then
+      bl.decho("balance debug: " .. bal .. " gained!")
+      regainedBalances = true
+    end
+  end
+  if regainedBalances and allTrue(bl.bal.bals) then
+    raiseEvent("bloom regained balance")
+  end
+end
+
+bl.bal.vitalsHandler = bl.bal.vitalsHandler
+if bl.bal.vitalsHandler then
+  killAnonymousEventHandler(bl.bal.vitalsHandler)
+end
+bl.bal.vitalsHandler = registerAnonymousEventHandler("gmcp.Char.Vitals", "bl.bal.updateBals")</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>room items and target list</name>
+					<packageName></packageName>
+					<script>bl.room = bl.room or {}
+bl.room.items = bl.room.items or {}
+bl.room.handlers = bl.room.handlers or {}
+bl.room.targets = bl.room.targets or {}
+bl.room.influenceables = bl.room.influenceables or {}
+local roomFunctions = {}
+--gets passed a gmcp item as 'item'
+
+local function checkIfRoomClear()
+  if
+    (not bl.active or #bl.room.targets == 0) and
+    (not bl.inf.active or #bl.room.influenceables == 0) and
+    not mmp.autowalking
+  then
+    raiseEvent("bloom room cleared")
+  end
+end
+
+local function addToTargets(item)
+  --first check if it's a non-dead mob.
+  if not item.attrib or not string.find(item.attrib, "m") or string.find(item.attrib, "d") then
+    return false
+  end
+  --then fetch from DB and make sure there's an entry.
+  local _, entry = next(db:fetch(bldb.denizens, db:eq(bldb.denizens.name, item.name)))
+  if entry then
+    --add to area if appropriate
+    if not entry.areas:find(gmcp.Room.Info.area) then
+      entry.areas = entry.areas .. gmcp.Room.Info.area .. ","
+      db:add(bldb.denizens, entry)
+      bl.decho(entry.name .. " spotted in " .. gmcp.Room.Info.area)
+    end
+    if entry.active == "false" then
+      return false
+    end
+    local inserted = false
+    --go down the list of targets and insert it based on priority.
+    for index, mobinfo in pairs(bl.room.targets) do
+      if entry.prio &gt; mobinfo.data.prio then
+        table.insert(bl.room.targets, index, {mob = item, data = entry})
+        inserted = true
+        break
+      end
+    end
+    --if it wasn't inserted in the priority routine, add it at the end.
+    if not inserted then
+      table.insert(bl.room.targets, {mob = item, data = entry})
+    end
+    return true
+  end
+  return false
+end
+
+local function removeFromTargets(id)
+  for index, mob in pairs(bl.room.targets) do
+    if mob.mob.id == id then
+      table.remove(bl.room.targets, index)
+      --walker hook. delay is to ensure that people have a chance to regain balance.
+      if #bl.room.targets == 0 then
+        tempTimer(3.5, checkIfRoomClear)
+      end
+      return true
+    end
+  end
+  return false
+end
+
+--function for adding stuff to the influencing table.
+
+local function addToInfluence(item)
+  if not item.attrib or not string.find(item.attrib, "m") or string.find(item.attrib, "d") then
+    return false
+  end
+  local _, entry = next(db:fetch(bldb.influence, db:eq(bldb.influence.name, item.name:lower())))
+  if entry then
+    if not entry.areas:find(gmcp.Room.Info.area) then
+      entry.areas = entry.areas .. gmcp.Room.Info.area .. ","
+      db:add(bldb.influence, entry)
+    end
+    if
+      entry.active and
+      (not bl.inf.influenced[item.id] or os.clock() &gt; (bl.inf.influenced[item.id] + 3630))
+    then
+      table.insert(bl.room.influenceables, {mob = item, data = entry})
+      return true
+    end
+  end
+  return false
+end
+
+local function removeFromInfluence(id)
+  for index, mob in pairs(bl.room.influenceables) do
+    if mob.mob.id == id then
+      --0 sec delay to let triggers resolve first.
+      tempTimer(
+        0,
+        function()
+        --same loop again, kinda janky. Gotta make sure it removes the right one, even if indexes changed in the meantime.
+          for index, mob in pairs(bl.room.influenceables) do
+            if mob.mob.id == id then
+              table.remove(bl.room.influenceables, index)
+            end
+          end
+          checkIfRoomClear()
+        end
+      )
+      return true
+    end
+  end
+  return false
+end
+
+--lighter version of the gmcp list handler that is called after making changes to database
+--this ensures that any changes made are reflected in current target list, without having to LOOK again.
+
+function bl.room.rebuildTargets()
+  bl.room.targets = {}
+  bl.room.influenceables = {}
+  local targetsAdded = false
+  for _, item in pairs(bl.room.items) do
+    local a, b = addToTargets(item) or addToInfluence(item)
+    if a or b then
+      targetsAdded = true
+    end
+  end
+  if targetsAdded then
+    raiseEvent("bloom targets updated")
+  end
+  checkIfRoomClear()
+end
+
+--populates target table, as well as a general 'all items in room' table.
+--also checks for beast.
+
+function roomFunctions.List()
+  local event = gmcp.Char.Items.List
+  if event.location ~= "room" then
+    return
+  end
+  bl.room.items = {}
+  bl.room.targets = {}
+  bl.room.influenceables = {}
+  bl.beast.beastHere = false
+  local targetsAdded = false
+  for _, item in pairs(event.items) do
+    table.insert(bl.room.items, item)
+    if bl.beast.list[item.id] then
+      bl.beast.beastHere = item.id
+    end
+    local a, b = addToTargets(item), addToInfluence(item)
+    if a or b then
+      targetsAdded = true
+    end
+  end
+  if targetsAdded then
+    --0 sec delay to ensure all other info gets in first.
+    tempTimer(
+      0,
+      function()
+        raiseEvent("bloom targets updated")
+      end
+    )
+  end
+  raiseEvent("bloom room updated")
+  tempTimer(0, checkIfRoomClear)
+end
+
+--handles the add event. Checks for beast and new targets.
+
+function roomFunctions.Add()
+  local event = gmcp.Char.Items.Add
+  if event.location ~= "room" then
+    return
+  end
+  table.insert(bl.room.items, event.item)
+  if bl.beast.list[event.item.id] then
+    bl.beast.beastHere = event.item.id
+  end
+  local a, b = addToTargets(event.item), addToInfluence(event.item)
+  if a or b then
+    raiseEvent("bloom targets updated")
+  end
+  raiseEvent("bloom room updated")
+end
+
+--if a mob gains the 'dead' flag, remove it from target list.
+--also keeps room.items up to date.
+
+function roomFunctions.Update()
+  local event = gmcp.Char.Items.Update
+  if event.location ~= "room" then
+    return
+  end
+  for index, item in pairs(bl.room.items) do
+    if event.item.id == item.id then
+      bl.room.items[index] = event.item
+      break
+    end
+  end
+  if string.find(event.item.attrib, "d") then
+    local a, b = removeFromTargets(event.item.id), removeFromInfluence(event.item.id)
+    if a or b then
+      raiseEvent("bloom targets updated")
+    end
+  end
+  raiseEvent("bloom room updated")
+end
+
+--handles stuff being removed from room.
+
+function roomFunctions.Remove()
+  local event = gmcp.Char.Items.Remove
+  if event.location ~= "room" then
+    return
+  end
+  if bl.beast.beastHere == event.item.id then
+    bl.beast.beastHere = false
+  end
+  for index, item in pairs(bl.room.items) do
+    if event.item.id == item.id then
+      table.remove(bl.room.items, index)
+      break
+    end
+  end
+  local a, b = removeFromTargets(event.item.id), removeFromInfluence(event.item.id)
+  if a or b then
+    raiseEvent("bloom targets updated")
+  end
+  raiseEvent("bloom room updated")
+end
+
+--handlers!
+for name, func in pairs(roomFunctions) do
+  if bl.room.handlers[name] then
+    killAnonymousEventHandler(bl.room.handlers[name])
+  end
+  bl.room.handlers[name] = registerAnonymousEventHandler("gmcp.Char.Items." .. name, func)
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Sixthsense tracker</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.defs = bl.defs or {}
+bl.defs.handlers = bl.defs.handlers or {}
+bl.defs.sixthsense = bl.defs.sixthsense or false
+local defFunctions = {}
+
+--decided to build in a lightweight sixthsense tracker. Nothing exciting, but needed so you know
+--if you can attack while blind.
+
+function defFunctions.Add()
+  if gmcp.Char.Defences.Add.name == "sixthsense" then
+    bl.defs.sixthsense = true
+  end
+end
+
+function defFunctions.Remove()
+  if table.contains(gmcp.Char.Defences.Remove, "sixthsense") then
+    bl.defs.sixthsense = false
+  end
+end
+
+function defFunctions.List()
+  bl.defs.sixthsense = false
+  for _, def in pairs(gmcp.Char.Defences.List) do
+    if def.name == "sixthsense" then
+      bl.defs.sixthsense = true
+    end
+  end
+end
+
+for name, func in pairs(defFunctions) do
+  if bl.defs.handlers[name] then
+    killAnonymousEventHandler(bl.defs.handlers[name])
+  end
+  bl.defs.handlers[name] = registerAnonymousEventHandler("gmcp.Char.Defences." .. name, func)
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Inventory handling</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.inv = bl.inv or {}
+bl.inv.inventory = bl.inv.inventory or {}
+bl.inv.handlers = bl.inv.handlers or {}
+local inventoryFunctions = {}
+
+function inventoryFunctions.List(_, _)
+  local event = gmcp.Char.Items.List
+  if event.location ~= "inv" then
+    return
+  end
+  --clear inventory table and rebuild
+  bl.inv.inventory = {}
+  for _, item in pairs(event.items) do
+    bl.inv.inventory[item.id] = item
+  end
+  raiseEvent("inventory updated")
+end
+
+function inventoryFunctions.Remove()
+  local event = gmcp.Char.Items.Remove
+  if event.location ~= "inv" then
+    return
+  end
+  bl.inv.inventory[event.item.id] = nil
+  raiseEvent("inventory updated")
+end
+
+function inventoryFunctions.Add()
+  local event = gmcp.Char.Items.Add
+  if event.location ~= "inv" then
+    return
+  end
+  bl.inv.inventory[event.item.id] = event.item
+  raiseEvent("inventory updated")
+end
+
+function inventoryFunctions.Update()
+  local event = gmcp.Char.Items.Update
+  if event.location ~= "inv" then
+    return
+  end
+  bl.inv.inventory[event.item.id] = event.item
+  raiseEvent("inventory updated")
+end
+
+for name, func in pairs(inventoryFunctions) do
+  if bl.inv.handlers[name] then
+    killAnonymousEventHandler(bl.inv.handlers[name])
+  end
+  bl.inv.handlers[name] = registerAnonymousEventHandler("gmcp.Char.Items." .. name, func)
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<Script isActive="yes" isFolder="no">
+				<name>Do stuff</name>
+				<packageName></packageName>
+				<script>--the limiter serves two purposes:
+--1. prevent spamming the game if multiple 'try to attack' events come in a short time.
+--2. When limiter expires, it checks if you can attack again.
+--this helps to deal with things like amnesia, stupidity, or astral insanity 'eating' attacks
+local limited
+
+local function limiter()
+  limited = true
+  tempTimer(
+    1,
+    function()
+      limited = false
+      bl.decho("limiter fired")
+      bl.act()
+    end
+  )
+end
+
+--attack function. This is run whenever the room targets are updated, you regain balance, or cure an affliction
+
+function bl.act()
+  --these are all the checks that would prevent you from attacking.
+  --while autowalker status doesn't neccesarily stop you from attacking, it's annoying if you interrupt a speedrun to bop something
+  --(and a very inconsistent, unreliable way to do a 'walking' basher, too)
+  if
+    mmp.autowalking or
+    not (bl.active or bl.inf.active) or
+    limited or
+    not bl.bal.canAct() or
+    bl.affs.affs.entangled or
+    (bl.affs.affs.brokenleftleg and bl.affs.affs.brokenrightleg) or
+    bl.affs.affs.brokenleftarm or
+    bl.affs.affs.brokenrightarm or
+    bl.affs.affs.transfix or
+    (bl.affs.affs.blind and not bl.defs.sixthsense)
+  then
+    return
+  end
+  --first try to attack, then try influencing.
+  if bl.active then
+    if bl.attack() then
+      limiter()
+      return
+    end
+  end
+  if bl.inf.active then
+    if bl.inf.influence() then
+      limiter()
+      return
+    end
+  end
+end
+
+registerAnonymousEventHandler("bloom affliction removed", "bl.act")
+registerAnonymousEventHandler("bloom regained balance", "bl.act")
+registerAnonymousEventHandler("bloom targets updated", "bl.act")</script>
+				<eventHandlerList />
+			</Script>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Bashing</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Target review menu</name>
+					<packageName></packageName>
+					<script>--colors for the display.
+local PAGE_LENGTH = 20
+
+--search is either a substring for creature name/alias for creature or an area - area is a boolean which will go 'this is an area, search accordingly'
+--page is used internally for clicky functionality.
+function bl.reviewTargets(search, area, page)
+  bl.newLine()
+  local start, stop = getLineNumber()
+  
+  search = search or ""
+  local results
+  if area then
+    results = db:fetch(bldb.denizens, db:like(bldb.denizens.areas, "%," .. search .. ",%"))
+  else
+    results =
+      db:fetch(
+        bldb.denizens,
+        db:OR(
+          db:like(bldb.denizens.name, "%" .. search .. "%"),
+          db:like(bldb.denizens.aliases, "%," .. search .. ",%")
+        )
+      )
+  end
+  if #results &lt;= 0 then
+    if area then
+      bl.echo("No entries found in the local area")
+    elseif search~="" then
+      bl.echo("No entries found for " .. search .. ".")
+    else
+      bl.echo("No database entries.")
+    end
+    bl.fakePrompt()
+    return
+  end
+  
+  --apply results filters here
+  local numPages = math.ceil(#results / PAGE_LENGTH)
+  page = math.max(1, math.min(numPages, (page or 1)))
+  local startingPoint = 1 + (page - 1) * PAGE_LENGTH
+  --display(numPages,page,startingPoint)
+  --title line
+  local title = ""
+  if area then
+    title = "Creatures in " .. search
+  elseif search and search ~= "" then
+    title = "Search Results for " .. search
+  else
+    title = "Here's everything!"
+  end
+  cecho(
+    string.format(
+      "%s/%s%s(%s%s%s)%s%s",
+      bl.c.border,
+      string.rep("=", 2),
+      bl.c.bracket,
+      bl.c.title,
+      title,
+      bl.c.bracket,
+      bl.c.border,
+      string.rep("=", 49 - #title)
+    )
+  )
+  --button to close the text menu
+  cechoLink(
+    string.format("%s(%sClose%s)", bl.c.bracket, bl.c.x, bl.c.bracket),
+    function()
+      bl.cleanup(start, stop)
+    end,
+    "",
+    true
+  )
+  cecho(bl.c.border .. "==\\")
+  for i = startingPoint, math.min(#results, startingPoint + PAGE_LENGTH - 1) do
+    local entry = results[i]
+    echo("\n")
+    --clickable link to delete an entry
+    cechoLink(
+      string.format("%s(%sX%s)", bl.c.bracket, bl.c.x, bl.c.bracket),
+      function()
+        db:delete(bldb.denizens, db:eq(bldb.denizens.name, entry.name))
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      "Delete entry for " .. entry.name .. "?",
+      true
+    )
+    echo(" ")
+    --clickable link to toggle an entry on or off
+    cechoLink(
+      (entry.active == "true" and bl.c.on or bl.c.off) .. string.sub(entry.name, 0, 40),
+      function()
+        db:set(
+          bldb.denizens.active,
+          entry.active == "true" and "false" or "true",
+          db:eq(bldb.denizens.name, entry.name)
+        )
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      (entry.active == "true" and "Deactivate" or "Activate") .. " entry for " .. entry.name .. "?",
+      true
+    )
+    --pad out the thing with spaces for the next entry.
+    echo(string.rep(" ", 41 - math.min(#entry.name, 40)))
+    cechoLink(
+      string.format(
+        "%s(%sAlias%s)",
+        bl.c.bracket,
+        entry.aliastarget == "true" and bl.c.on or bl.c.off,
+        bl.c.bracket
+      ),
+      function()
+        db:set(
+          bldb.denizens.aliastarget,
+          entry.aliastarget == "true" and "false" or "true",
+          db:eq(bldb.denizens.name, entry.name)
+        )
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      (entry.aliastarget == "true" and "Deactivate" or "Activate") ..
+      " alias targetting for " ..
+      entry.name ..
+      "?",
+      true
+    )
+    echo(" ")
+    --priority thingo
+    --decrease priority by 1
+    cecho(bl.c.title .. "Prio:")
+    cechoLink(
+      bl.c.x .. "&lt;",
+      function()
+        db:set(
+          bldb.denizens.prio,
+          entry.prio - 1,
+          db:eq(bldb.denizens.name, entry.name)
+        )
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      "",
+      true
+    )
+    cecho(bl.c.text .. " " .. entry.prio .. " ")
+    --increase priority by 1
+    cechoLink(
+      bl.c.x .. "&gt;",
+      function()
+      db:set(
+          bldb.denizens.prio,
+          entry.prio + 1,
+          db:eq(bldb.denizens.name, entry.name)
+        )
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      "",
+      true
+    )
+  end
+  echo("\n")
+  cecho(bl.c.border .. "\\==")
+  if page &gt; 1 then
+    cechoLink(
+      string.format("%s(%s&lt;-%s)", bl.c.bracket, bl.c.x, bl.c.bracket),
+      function()
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page - 1)
+      end,
+      "See less results?",
+      true
+    )
+  else
+    cecho("&lt;dim_grey&gt;(&lt;-)")
+  end
+  cecho(string.format(" %sPage %s of %s ", bl.c.text, page, numPages))
+  if page &lt; numPages then
+    cechoLink(
+      string.format("%s(%s-&gt;%s)", bl.c.bracket, bl.c.x, bl.c.bracket),
+      function()
+        bl.cleanup(start, stop)
+        bl.reviewTargets(search, area, page + 1)
+      end,
+      "See more results?",
+      true
+    )
+  else
+    cecho("&lt;dim_grey&gt;(-&gt;)")
+  end
+  moveCursorEnd()
+  cecho(bl.c.border .. string.rep("=", 62 - getColumnNumber()) .. "/")
+  bl.fakePrompt()
+  moveCursorEnd()
+  stop = getLineNumber()
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Alias List</name>
+					<packageName></packageName>
+					<script>--function borrowed and adapted from Demonnic for rearranging the sorted list, thanks!
+
+local function chunkify(tbl, num_chunks)
+  local pop =
+    function(t)
+      return table.remove(t, 1)
+    end
+  tbl = table.deepcopy(tbl)
+  local tblsize = #tbl
+  local base_chunk_size = tblsize / num_chunks
+  local chunky_chunks = tblsize % num_chunks
+  local chunks = {}
+  for i = 1, num_chunks do
+    local chunk_size = base_chunk_size
+    if i &lt;= chunky_chunks then
+      chunk_size = chunk_size + 1
+    end
+    local chunk = {}
+    for j = 1, chunk_size do
+      chunk[j] = pop(tbl)
+    end
+    chunks[i] = chunk
+  end
+  local lines = #chunks
+  local output = {}
+  for i = 1, lines do
+    for j = 1, num_chunks do
+      local value = chunks[j][i]
+      if value then
+        table.insert(output, value)
+      end
+    end
+  end
+  return output
+end
+
+function bl.listAliases()
+  bl.newLine()
+  cecho(
+    string.format(
+      "%s/=%s(%sTargeting Aliases%s)%s%s\\",
+      bl.c.border,
+      bl.c.bracket,
+      bl.c.title,
+      bl.c.bracket,
+      bl.c.border,
+      string.rep("=", 71)
+    )
+  )
+  local aliases = {}
+  for _, aliasEntry in pairs(db:fetch(bldb.aliases)) do
+    table.insert(aliases, aliasEntry.alias)
+  end
+  table.sort(aliases)
+  local aliases = chunkify(aliases, 6)
+  cecho("\n" .. bl.c.border .. "| ")
+  for index, alias in pairs(aliases) do
+    cecho(bl.c.text .. alias .. string.rep(" ", 15 - #alias))
+    if index % 6 == 0 and index ~= #aliases then
+      cecho(bl.c.border .. "|\n| ")
+    end
+  end
+  moveCursorEnd()
+  cecho(bl.c.border .. string.rep(" ", 92 - #getCurrentLine()) .. "|")
+  cecho("\n" .. bl.c.border .. "\\" .. string.rep("=", 91) .. "/")
+  bl.fakePrompt()
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Beast handling</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.beast = bl.beast or {}
+bl.beast.beastHere = bl.beast.beastHere or false
+bl.beast.list = bl.beast.list or {}
+bl.beast.gagnext = bl.beast.gagnext or false
+
+--a function to silently check beast info. Enables gags and sends beast info.
+function bl.beast.check(beastID)
+  bl.beast.gagnext = true
+  bl.send("Beast info" .. (beastID and " " .. beastID or ""))
+end
+
+--this associates and damage typing to all the possible beast attacks.
+local attackmap =
+  {
+    ["Battle"] = {command = "Attack", types = {typeless = .9}},
+    ["Breathe Lightning"] = {command = "Breathe Lightning", types = {electricity = 1}},
+    ["Breathe Fire"] = {command = "Breathe Fire", types = {fire = 1}},
+    ["Breathe Cold"] = {command = "Breathe Cold", types = {cold = 1}},
+    ["Breathe Gas"] = {command = "Breathe Gas", types = {poison = 1}},
+    ["Breathe Psionicblast"] = {command = "Breathe Cold", types = {psychic = 1}},
+    ["Breathe Peppermint"] = {command = "Breathe Peppermint", types = {electricity = .66, asphyxiation = .66}},
+    ["Breathe Soot"] = {command = "Breathe Soot", types = {poison = .66, asphyxiation = .66}},
+    ["Breathe Divinus"] = {command = "Breathe Divinus", types = {divinus = 1}},
+    ["Breathe Excorable"] = {command = "Breathe Excorable", types = {excorable = 1}},
+    ["Aquamancy"] = {command = "Breathe Frost", types = {cold = 1}},
+  }
+
+--This is only called when a beast is first added into the system.
+--otherwise all the logic to keep track of beast is in the GMCP room items script
+function bl.beast.checkForBeast()
+  bl.beast.beastHere = false
+  for _, item in pairs(bl.room.items) do
+    if bl.beast.list[item.id] then
+      bl.beast.beastHere = item.id
+      return
+    end
+  end
+end
+
+--goes through the above attackmap and uses it to build a table of your beasts available attacks.
+--like the above function, called when a beast is added or updated via BEAST INFO
+function bl.beast.mapAttacks(beastID)
+  if not bl.beast.list[beastID] then
+    return
+  end
+  local beast = bl.beast.list[beastID]
+  beast.attacks = {}
+  for _, ability in pairs(beast.abilities) do
+    if attackmap[ability] then
+      beast.attacks[attackmap[ability].command] = attackmap[ability].types
+    --also, healing! Useful useful if you've got it, maybe. IDK.
+    elseif ability == "Heal Health" then
+      beast.healing = true
+    end
+  end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>attack script</name>
+					<packageName></packageName>
+					<script>function bl.attack()
+  --It gets the first target in the list. Note: this system doesn't hold a 'target' variable anywhere.
+  --current target is always just first entry in the priority-sorted targets table.
+  local targetData = bl.room.targets[1]
+  --no targets here or other badnews? failsafe.
+  if not targetData then
+    return false
+  end
+  --default target to the mob id, then check if you can (and want to) find an alias for it.
+  local target = targetData.mob.id
+  if targetData.data.aliastarget == "true" then
+    for _, aliasEntry in pairs(db:fetch(bldb.aliases)) do
+      if string.find(targetData.data.aliases, "," .. aliasEntry.alias .. ",") then
+        target = aliasEntry.alias
+        break
+      end
+    end
+  end
+  --beast attack logic.
+  if bl.beast.beastHere and gmcp.Char.Vitals.beastbal == "1" then
+    if bl.beast.list[bl.beast.beastHere].healing and (tonumber(gmcp.Char.Vitals.hp)/tonumber(gmcp.Char.Vitals.maxhp))&lt;.5 then
+    bl.send("Beast Order Heal Health")
+    else
+      local bestAttack, maxDamage = "", 0
+      for attack, types in pairs(bl.beast.list[bl.beast.beastHere].attacks) do
+        local damage = 0
+        for type, percent in pairs(types) do
+          damage = damage + targetData.data[type] * percent * bl.buffs[type]
+        end
+        if damage &gt; maxDamage then
+          maxDamage, bestAttack = damage, attack
+        end
+      end
+      bl.send("Beast Order " .. bestAttack .. " " .. target)
+    end
+  end
+  --best attack maffs
+  local bestAttack, maxDamage = "", 0
+  for attack, types in pairs(bl.attacks) do
+    local damage = 0
+    for type, percent in pairs(types) do
+      damage = damage + targetData.data[type] * percent * bl.buffs[type]
+    end
+    if damage &gt; maxDamage then
+      maxDamage, bestAttack = damage, attack
+    end
+  end
+  bl.send(string.format(bestAttack, target))
+  return true
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Buffs</name>
+					<packageName></packageName>
+					<script>--initialize buffs
+bl.buffs =
+  bl.buffs or
+  {
+    typeless = 1,
+    blunt = 1,
+    cutting = 1,
+    magical = 1,
+    fire = 1,
+    cold = 1,
+    poison = 1,
+    asphyxiation = 1,
+    electricity = 1,
+    psychic = 1,
+    excorable = 1,
+    divinus = 1,
+  }
+bl.gagBuffs = false
+
+bl.buffsChecked = false
+function bl.checkBuffs()
+  bl.gagBuffs = true
+  bl.send("bodyscan buffs")
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Influencing</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Influencing core</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.inf = bl.inf or {}
+bl.inf.influenced = bl.inf.influenced or {}
+bl.inf.count = 0
+bl.inf.active = bl.inf.active or false
+bl.inf.oil = "none"</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Skills handling</name>
+					<packageName></packageName>
+					<script>bl.inf = bl.inf or {}
+bl.inf.attacks =
+  bl.inf.attacks or
+  {charity = {}, weakening = {}, village = {}, paranoia = {}, empowering = {}, seduction = {}}
+local ref =
+  {
+    Begging = "charity",
+    Rumours = "paranoia",
+    Teasing = "weakening",
+    Compliments = "empowering",
+    Flattery = "seduction",
+    Supplication = "charity",
+    Distrust = "paranoia",
+    Mockery = "weakening",
+    Admiration = "empowering",
+    Charm = "seduction",
+    Distrust = "paranoia",
+    Wheedling = "charity",
+    Conspiracies = "paranoia",
+    Derision = "weakening",
+    Praise = "empowering",
+    Beguiling = "seduction",
+    Proselytising = "village",
+    Freedom = "village",
+    Manipulation = "village",
+    Accordance = "village",
+    Shock = "village",
+    Oration = "village",
+    Preaching = "village",
+    Liberty = "village",
+    Trickery = "village",
+    Collaboration = "village",
+    Awe = "village",
+    Lectures = "village",
+    Evangelising = "village",
+    Revolution = "village",
+    Intrigue = "village",
+    Assimilation = "village",
+    Brainwash = "village",
+    Recitation = "village",
+  }
+
+function bl.inf.skillList()
+  local skills = gmcp.Char.Skills.List
+  if skills.group == "influence" then
+    bl.inf.attacks = {charity = {}, weakening = {}, paranoia = {}, empowering = {}, seduction = {}, village = {}}
+    bl.inf.hasAura = false
+    for _, skill in ipairs(skills.list) do
+      if ref[skill] then
+        table.insert(bl.inf.attacks[ref[skill]], skill)
+      elseif skill == "CharismaticAura" then
+        bl.inf.hasAura = true
+      end
+    end
+  end
+end
+
+registerAnonymousEventHandler("gmcp.Char.Skills.List", "bl.inf.skillList")</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Influencing database review</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.inf = bl.inf or {}
+--EVERYTHING IN HERE IS HELLA CURSED READ AT YOUR OWN RISK
+local infTypes = {"empowering","charity","seduction","paranoia","weakening"}
+local weaknesses =
+  {
+    brave = "empowering",
+    friendly = "charity",
+    sensuous = "seduction",
+    greedy = "weakening",
+    intimidating = "paranoia",
+  }
+local immunities =
+  {
+    brave = "weakening",
+    friendly = "paranoia",
+    sensuous = "empowering",
+    greedy = "charity",
+    intimidating = "seduction",
+  }
+
+local PAGE_LENGTH = 20
+
+--color definitions
+--bracket: the parentheses brackets.
+--border: the border color.
+--X: the color for the X/cancel buttons.
+--off: the color of an entry if it's inactive
+--on: the color of an active entry.
+--title: color for titles/words.
+--current: the current influence type for a mob
+--immune: the type of influence a mob is immune to
+--default: other influence types that are neither current or immune.
+--easily change system colors here
+
+local c =
+{
+bracket = bl.c.bracket,
+border = bl.c.border,
+x = bl.c.x,
+off = bl.c.off,
+on = bl.c.on,
+title = bl.c.title,
+text = bl.c.text,
+current = "&lt;green&gt;",
+immune = "&lt;dim_grey&gt;",
+weak = "&lt;hot_pink&gt;",
+default = "&lt;light_goldenrod&gt;",
+}
+
+
+--this gags a bunch of lines at once.
+
+
+
+function bl.inf.review(search, area, page)
+  moveCursorEnd()
+  if getCurrentLine() ~= "" then
+    echo("\n")
+    moveCursorEnd()
+  end
+  local start, stop = getLineNumber()
+  search = search or ""
+  local results
+  if area then
+    results = db:fetch(bldb.influence, db:like(bldb.influence.areas, "%," .. search .. ",%"))
+  else
+    results =
+      db:fetch(
+        bldb.influence,
+        db:OR(
+          db:like(bldb.influence.name, "%" .. search .. "%"),
+          db:like(bldb.influence.alias, "%," .. search .. ",%")
+        )
+      )
+  end
+  if #results &lt;= 0 then
+    if search then
+      bl.echo("No entries found for " .. search .. ".")
+    else
+      bl.echo("No database entries.")
+    end
+    return
+  end
+  --calculates numbers needed for pagination
+  local numPages = math.ceil(#results/PAGE_LENGTH)
+  page = math.max(1,math.min(numPages,(page or 1)))
+  local startingPoint = 1+(page-1)*PAGE_LENGTH
+  
+  --#results
+  local title = ""
+  if area then
+    title = "Creatures in "..search
+  elseif search ~= "" then
+    title = "Search Results for " .. search
+  else
+    title = "Here's everything!"
+  end
+  
+  cecho(
+    string.format(
+      "%s/%s%s(%s%s%s)%s%s",
+      c.border,
+      string.rep("=",2),
+      c.bracket,
+      c.title,
+      title,
+      c.bracket,
+      c.border,
+      string.rep("=",49-#title)
+    )
+  )  
+  cechoLink(
+    string.format("%s(%sClose%s)",c.bracket,c.x,c.bracket),
+    function() bl.cleanup(start,stop) end,
+    "",
+    true
+  )
+  cecho(c.border.."==\\\n")
+    
+    
+  --this handles the echoes
+  for i=startingPoint, math.min(#results, startingPoint+PAGE_LENGTH-1) do
+  local entry = results[i]
+    --echo the X
+    cechoLink(
+      string.format("%s(%sX%s)",c.bracket,c.x,c.bracket),
+      function()
+        db:delete(bldb.influence, db:eq(bldb.influence.name, entry.name))
+        bl.cleanup(start,stop)
+        bl.inf.review(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      "Delete '" .. entry.name .. "' from the database?",
+      true
+    )
+    --space between X and mob name
+    echo(" ")
+    local name = string.sub(entry.name, 0, 40)
+    --this is what happens if you click on the name itself.
+    cechoLink(
+      (entry.active == "true" and c.on or c.off) .. name,
+      function()
+        db:set(bldb.influence.active, entry.active == "true" and "false" or "true", db:eq(bldb.influence.name, entry.name))
+        bl.cleanup(start,stop)
+        bl.inf.review(search, area, page)
+        bl.room.rebuildTargets()
+      end,
+      (entry.active == "true" and "Disable" or "Enable") .. " entry for " .. entry.name,
+      true
+    )
+    echo(string.rep(" ", 40-#name))
+    --lets bop out some clickable things for influence types
+    for _, infType in pairs(infTypes) do
+      echo(" ") --padding
+      --get the first letter on the influence type - this is used for the clicky button's text
+      local char = string.upper(string.sub(infType,1,1))
+      --if immune to that type of influence, grey it out.
+      if immunities[entry.mindset] == infType then
+        cecho(string.format("%s(%s)", c.immune, char))
+      else
+      --pick color for the clicky letter
+        local color = c.default
+        if entry.preferred == infType then
+          color = c.current
+        elseif weaknesses[entry.mindset] == infType then
+          color = c.weak
+        end 
+        cechoLink(
+        string.format("%s(%s%s%s)", c.bracket, color, char, c.bracket),
+        function()
+          db:set(bldb.influence.preferred, infType, db:eq(bldb.influence.name, entry.name))
+          bl.cleanup(start,stop)
+          bl.inf.review(search, area, page)
+          bl.room.rebuildTargets()
+        end,
+        "Use "..infType.." to influence "..entry.name.."?",
+        true
+        )
+      end
+    end  
+    echo("\n")
+  end
+  --less and more line
+  cecho(c.border.."\\==")
+  
+  if page &gt; 1 then
+  cechoLink(
+    string.format("%s(%s&lt;-%s)",c.bracket,c.x,c.bracket),
+    function()
+      bl.cleanup(start, stop)
+      bl.inf.review(search, area, page-1)
+    end,
+    "See less results?",
+    true
+  )
+  else
+  cecho(c.immune.."(&lt;-)")
+  end
+  cecho(string.format(" %sPage %s of %s ", c.text, page, numPages)) 
+  if page &lt; numPages then
+  cechoLink(
+    string.format("%s(%s-&gt;%s)",c.bracket,c.x,c.bracket),
+    function()
+      bl.cleanup(start, stop)
+      bl.inf.review(search, area, page+1)
+    end,
+    "See more results?",
+    true
+  )
+  else
+    cecho(c.immune.."(-&gt;)")
+  end
+  moveCursorEnd()
+  cecho(c.border..string.rep("=",62-getColumnNumber()).."/")
+  bl.fakePrompt()
+  moveCursorEnd()
+  stop = getLineNumber()
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Influence action</name>
+					<packageName></packageName>
+					<script>--function to send influences and stuff.
+
+--function to identify and wear/remove all scarecrowhats in inventory.
+local hatskins = {"a scarecrow hat", "a shabby swamp-dweller's hat", "a tattered rancher's hat"}
+
+local function wearScarecrow(toWear)
+  for id, item in pairs(bl.inv.inventory) do
+    if table.contains(hatskins, item.name) then
+      if item.attrib:find("w") and not toWear then
+        bl.send("Remove " .. id)
+      elseif not item.attrib:find("w") and toWear then
+        bl.send("Wear " .. id)
+      end
+    end
+  end
+end
+
+
+local oils =
+  {
+    charity = "sandalwood",
+    empowering = "dragonsblood",
+    weakening = "vanilla",
+    seduction = "musk",
+    paranoia = "jasmine",
+  }
+--function to send influences and stuff.
+function bl.inf.influence()
+  local infData = bl.room.influenceables[1]
+  --no targets here or other badnews? failsafe.
+  if not infData then
+    return false
+  end
+  bl.inf.count = bl.inf.count % #bl.inf.attacks[infData.data.preferred]
+  --wear/remove scarecrow hats.
+  wearScarecrow(infData.data.preferred == "charity")
+  --apply oils
+  if bl.inf.autoOil and bl.inf.oil ~= oils[infData.data.preferred] then
+  bl.send("Apply "..oils[infData.data.preferred])
+  end
+  bl.send(
+    "Influence " ..
+    infData.mob.id ..
+    " with " ..
+    bl.inf.attacks[infData.data.preferred][bl.inf.count + 1]
+  )
+  return true
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Aff tracker</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Aff tracker functions</name>
+					<packageName></packageName>
+					<script>--slightly modified version of my bl.affs.rak aff tracker.
+--raises events on afflictions added/removed.
+--while not all of these afflictions are needed to be tracked for bashing,
+--it was easier to just bundle the whole thing.
+bl = bl or {}
+bl.affs = bl.affs or {}
+bl.affs.affs = bl.affs.affs or {}
+local oldaffs = {}
+bl.affs.handlers = bl.affs.handlers or {}
+local stamps = stamps or {}
+
+local function stamp(affliction)
+  stamps[affliction] = os.clock()
+end
+
+function bl.affs.printStamp(affliction)
+  if stamps[affliction] then
+    cecho(
+      " &lt;ansi_032&gt;(&lt;ansi_073&gt;" ..
+      (math.floor((os.clock() - stamps[affliction]) * 100) / 100) ..
+      "&lt;ansi_032&gt;)"
+    )
+    stamps[affliction] = nil
+  else
+    cecho(" &lt;ansi_032&gt;(&lt;ansi_073&gt;??&lt;ansi_032&gt;)")
+  end
+end
+
+function bl.affs.echo(text)
+  bl.decho(text)
+end
+
+function bl.affs.add()
+  local affliction = gmcp.Char.Afflictions.Add.name
+  bl.affs.echo(affliction .. " added by gmcp.")
+  raiseEvent("bl.affs.affliction added")
+  bl.affs.affs[affliction] = true
+  stamp(affliction)
+end
+
+if bl.affs.handlers.add then
+  killAnonymousEventHandler(bl.affs.handlers.add)
+end
+bl.affs.handlers.add = registerAnonymousEventHandler("gmcp.Char.Afflictions.Add", "bl.affs.add")
+
+function bl.affs.remove()
+  for _, affliction in pairs(gmcp.Char.Afflictions.Remove) do
+    if bl.affs.affs[affliction] then
+      bl.affs.echo(affliction .. " removed by gmcp.")
+      bl.affs.affs[affliction] = nil
+      tempTimer(0, function() raiseEvent("bloom affliction removed") end)
+    end
+  end
+end
+
+if bl.affs.handlers.remove then
+  killAnonymousEventHandler(bl.affs.handlers.remove)
+end
+bl.affs.handlers.remove = registerAnonymousEventHandler("gmcp.Char.Afflictions.Remove", "bl.affs.remove")
+
+function bl.affs.list()
+  oldaffs = bl.affs.affs
+  bl.affs.affs = {}
+  for _, affliction in pairs(gmcp.Char.Afflictions.List) do
+    bl.affs.affs[affliction.name] = true
+  end
+  for aff, _ in pairs(oldaffs) do
+    if not bl.affs.affs[aff] then
+      raiseEvent("bloom affliction removed")
+      break
+    end
+  end
+  for aff, _ in pairs(bl.affs.affs) do
+    if not oldaffs[aff] then
+      raiseEvent("bloom affliction added")
+      break
+    end
+  end
+end
+
+if bl.affs.handlers.list then
+  killAnonymousEventHandler(bl.affs.handlers.list)
+end
+bl.affs.handlers.list = registerAnonymousEventHandler("gmcp.Char.Afflictions.List", "bl.affs.list")
+
+function bl.affs.diagAff(affliction)
+  bl.affs.affs[affliction] = true
+end
+
+function bl.affs.diagEnd()
+  --check for afflictions we just discovered
+  for affliction, _ in pairs(bl.affs.affs) do
+    if not oldaffs[affliction] then
+      bl.affs.echo(affliction .. " added by diagnose.")
+      stamp(affliction)
+    end
+  end
+  --check for afflictions we used to have but don't anymore.
+  for affliction, _ in pairs(oldaffs) do
+    if not bl.affs.affs[affliction] then
+      bl.affs.echo(affliction .. " removed by diagnose.")
+    end
+  end
+end
+
+function bl.affs.symptom(affliction)
+  if not bl.affs.affs[affliction] then
+    bl.affs.echo(affliction .. " added by symptom.")
+    bl.affs.affs[affliction] = true
+    stamp(affliction)
+    raiseEvent("bloom affliction added")
+  end
+end
+
+function bl.affs.cured(affliction)
+  if bl.affs.affs[affliction] then
+    bl.affs.echo(affliction .. " cured by trigger.")
+    bl.affs.affs[affliction] = nil
+    raiseEvent("bloom affliction removed")
+  end
+end
+
+function bl.affs.recklessCheck()
+  local vitals = gmcp.Char.Vitals
+  if
+    vitals.ego == vitals.maxego and
+    vitals.mp == vitals.maxmp and
+    vitals.hp == vitals.maxhp and
+    vitals.pow == "10"
+  then
+    bl.affs.affs.recklessness = true
+    bl.affs.echo("Reckless check - added recklessness")
+  else
+    bl.affs.affs.recklessness = nil
+    bl.affs.echo("Reckless check - removed recklessness")
+  end
+end
+</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Bloom Walker stuff</name>
+				<packageName></packageName>
+				<script></script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>demonwalker Code</name>
+					<packageName></packageName>
+					<script>--[===[
+The MIT License (MIT)
+
+Copyright (c) 2020 Damian Monogue
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+]===]
+--This is demonnic's demonwalker, put into a new namespace to avoid conflicts with other code.
+bl = bl or {}
+bl.walker = bl.walker or {}
+bl.walker.autowalker = bl.walker.autowalker or {}
+bl.walker.autowalker.config = bl.walker.autowalker.config or {}
+if bl.walker.autowalker.enabled == nil then
+  bl.walker.autowalker.enabled = false
+end
+-- Set to false if you don't want to go back to the room you start the walker in when it's done
+bl.walker.autowalker.config.returnToStart = false
+
+function bl.walker:echo(msg)
+  cecho(string.format("\n&lt;blue&gt;(&lt;green&gt;Demonnic&lt;blue&gt;):&lt;white&gt; %s", msg))
+end
+
+function bl.walker:findAndRemove(targetTable, item)
+  table.remove(targetTable, table.index_of(targetTable, item))
+end
+
+function bl.walker.autowalker:init(rooms)
+  if rooms == nil then
+    rooms = {}
+  end
+  if type(rooms) ~= "table" then
+    bl.walker:echo(
+      "You tried to initialize the autowalker with an argument, and it was not a table of room ID numbers. Try again"
+    )
+    return
+  end
+  if bl.walker.autowalker.enabled then
+    return
+  end
+  bl.walker.autowalker.enabled = true
+  local currentRoom = mmp.currentroom
+  bl.walker.autowalker.currentRoom = currentRoom
+  bl.walker.autowalker.startingRoom = currentRoom
+  local area = getRoomArea(currentRoom)
+  bl.walker.autowalker.area = area
+  if #rooms ~= 0 then
+    area = getRoomArea(rooms[1])
+    bl.walker.autowalker.area = area
+    if table.index_of(rooms, currentRoom) then
+      bl.walker:findAndRemove(rooms, currentRoom)
+    end
+    bl.walker.autowalker.remainingRooms = table.deepcopy(rooms)
+  else
+    local areaRooms = getAreaRooms(area)
+    bl.walker:findAndRemove(areaRooms, currentRoom)
+    if areaRooms[0] then
+      areaRooms[#areaRooms + 1] = areaRooms[0]
+      areaRooms[0] = nil
+    end
+    bl.walker.autowalker.remainingRooms = table.deepcopy(areaRooms)
+  end
+  bl.walker.autowalker:registerEventHandlers()
+  raiseEvent("bloomwalker.arrived")
+end
+
+function bl.walker.autowalker:stop()
+  if not bl.walker.autowalker.enabled then
+    return
+  end
+  bl.walker.autowalker.currentRoom = nil
+  bl.walker.autowalker.remainingRooms = nil
+  bl.walker.autowalker.enabled = false
+  bl.walker.autowalker:removeEventHandlers()
+  raiseEvent("bloomwalker.finished")
+  if bl.walker.autowalker.config.returnToStart then
+    mmp.gotoRoom(bl.walker.autowalker.startingRoom)
+  end
+end
+
+function bl.walker.autowalker:move()
+  if not bl.walker.autowalker.enabled then
+    return
+  end
+  bl.walker.autowalker.nextRoom = bl.walker.autowalker:closestRoom()
+  if bl.walker.autowalker.nextRoom and bl.walker.autowalker.nextRoom ~= "" then
+--    display(bl.walker.autowalker.nextRoom)
+
+    if getPath(mmp.currentroom, bl.walker.autowalker.nextRoom) then
+      doSpeedWalk()
+    else
+      raiseEvent("mmapper failed path")
+    end
+
+--     mmp.gotoRoom(bl.walker.autowalker.nextRoom)
+  else
+    raiseEvent("bloomwalker.stop")
+  end
+end
+
+function bl.walker.autowalker:arrived()
+  if tonumber(mmp.currentroom) == tonumber(bl.walker.autowalker.nextRoom) then
+    bl.walker.autowalker.currentRoom = mmp.currentroom
+    bl.walker:findAndRemove(bl.walker.autowalker.remainingRooms, mmp.currentroom)
+    raiseEvent("bloomwalker.arrived")
+  else
+    debugc(
+      "Demonnic: Somehow, the mudlet mapper says we have arrived but it is not to the room we said to go to."
+    )
+  end
+end
+
+function bl.walker.autowalker:failedPath()
+  bl.walker:findAndRemove(bl.walker.autowalker.remainingRooms, bl.walker.autowalker.nextRoom)
+  bl.walker.autowalker.currentRoom = mmp.currentroom
+  raiseEvent("bloomwalker.move")
+end
+
+function bl.walker.autowalker:removeEventHandlers()
+  for _, handlerID in pairs(bl.walker.autowalker.eventHandlers) do
+    killAnonymousEventHandler(handlerID)
+  end
+end
+
+function bl.walker.autowalker:registerEventHandlers()
+  bl.walker.autowalker.eventHandlers = bl.walker.autowalker.eventHandlers or {}
+  bl.walker.autowalker:removeEventHandlers()
+  bl.walker.autowalker.eventHandlers.move =
+    registerAnonymousEventHandler("bloomwalker.move", bl.walker.autowalker.move)
+  bl.walker.autowalker.eventHandlers.stop =
+    registerAnonymousEventHandler("bloomwalker.stop", bl.walker.autowalker.stop)
+  bl.walker.autowalker.eventHandlers.arrived =
+    registerAnonymousEventHandler("mmapper arrived", bl.walker.autowalker.arrived)
+  bl.walker.autowalker.eventHandlers.failedPath =
+    registerAnonymousEventHandler("mmapper failed path", bl.walker.autowalker.failedPath)
+end
+
+function bl.walker.autowalker:getAdjacantRooms(roomID)
+  local adjacentRooms = table.keys(getSpecialExits(roomID))
+  local exits = getRoomExits(roomID)
+  for _, id in pairs(exits) do
+    adjacentRooms[#adjacentRooms + 1] = id
+  end
+  return adjacentRooms
+end
+
+function bl.walker.autowalker:extractFirstUnvisitedRoom(rooms)
+  local remainingRooms = bl.walker.autowalker.remainingRooms
+  for _, id in ipairs(rooms) do
+    if table.index_of(remainingRooms, id) then
+      return id
+    end
+  end
+  return nil
+end
+
+function bl.walker.autowalker:closestRoom()
+  local adjacentRooms = bl.walker.autowalker:getAdjacantRooms(mmp.currentroom)
+  local remainingRooms = bl.walker.autowalker.remainingRooms
+  if not remainingRooms then
+    return ""
+  end
+  if #remainingRooms == 0 then
+    return ""
+  end
+  local roomID
+  -- check all the directly adjacent rooms
+  roomID = bl.walker.autowalker:extractFirstUnvisitedRoom(adjacentRooms)
+  if roomID then
+    return roomID
+  end
+  -- ok, check all the rooms 2 steps away
+  for _, id in ipairs(adjacentRooms) do
+    local adjRooms = bl.walker.autowalker:getAdjacantRooms(id)
+    roomID = bl.walker.autowalker:extractFirstUnvisitedRoom(adjRooms)
+    if roomID then
+      return roomID
+    end
+  end
+  -- fine, I'll brute force it.
+  local distance = 99999
+  for _, v in pairs(remainingRooms) do
+    local ok, pathLength = getPath(bl.walker.autowalker.currentRoom, v)
+    if ok and pathLength &lt; distance then
+      distance = pathLength
+      roomID = v
+      if distance &lt;= 3 then
+        return roomID
+      end
+    end
+  end
+  return roomID or ""
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Walker integration</name>
+					<packageName></packageName>
+					<script>--some small stuff needed to tie bloom into demonwalker. Would like a different, more robust walker solution.
+bl = bl or {}
+bl.walker = bl.walker or {}
+bl.walker.active = bl.walker.active or false
+
+function bl.walker.run(path)
+  bl.walker.autowalker.enabled = false
+  bl.walker.active = true
+  bl.echo("Started walking")
+  bl.walker.autowalker:init(bl.paths[path])
+  if
+    (not bl.active or #bl.room.targets == 0) and (not bl.inf.active or #bl.room.influenceables == 0)
+  then
+    raiseEvent("bloomwalker.move")
+  end
+end
+
+--some stuff to make icedigger/gravedigger pits work smoothly.
+
+function bl.walker.walk()
+  if bl.walker.active then
+    if gmcp.Room.Info.name == "Bottom of a sand pit" then
+      setExit(gmcp.Room.Info.num, gmcp.Room.Info.exits.u or 5547, "up")
+      raiseEvent("bloomwalker.move")
+      setExit(gmcp.Room.Info.num, -1, "up")
+    elseif gmcp.Room.Info.name == "The bottom of a frozen pit" then
+      if not roomExists(gmcp.Room.Info.num) then
+        addRoom(gmcp.Room.Info.num)
+        setRoomName(gmcp.Room.Info.num, gmcp.Room.Info.name)
+        setRoomArea(gmcp.Room.Info.num, "Iceburn Plains")
+        setRoomCoordinates(gmcp.Room.Info.num, 0, 0, -3)
+      end
+      setExit(gmcp.Room.Info.num, gmcp.Room.Info.exits.u or 23407, "up")
+      raiseEvent("bloomwalker.move")
+      setExit(gmcp.Room.Info.num, -1, "up")
+    else
+      raiseEvent("bloomwalker.move")
+    end
+  end
+end
+
+function bl.walker.finished()
+  if bl.walker.active then
+    bl.walker.active = false
+    bl.echo("Path finished.")
+  end
+end
+
+function bl.walker.arrived()
+  bl.act()
+end
+
+function bl.walker.stop()
+  bl.walker.autowalker:stop()
+  if mmp.autowalking then
+    mmp.stop()
+  end
+  bl.echo("Auto-walking stopped")
+end
+
+registerAnonymousEventHandler("bloomwalker.finished", "bl.walker.finished")
+registerAnonymousEventHandler("bloom room cleared", "bl.walker.walk")
+registerAnonymousEventHandler("bloomwalker.arrived", "bl.walker.arrived")</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Paths</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.paths = bl.paths or {}
+
+--note: paths are only really important for hunting things when you'd want to walk across multiple areas,
+--or exclude certain areas from a run.
+
+bl.paths.prison = { 12808, 13066, 12809, 12805, 13056, 12800, 13058, 13059, 12792, 13054, 13055, 13048, 13049, 13044, 
+13040, 13042, 13043, 13037, 13038, 13039, 12772, 13033, 13035, 13028, 13029, 13030, 13031, 13024, 
+13025, 13027, 12762, 13023, 13016, 13018, 13013, 13014, 13000, 13001, 13002, 13003, 12998, 12992, 
+12993, 12994, 12995, 12988, 12990, 12991, 12984, 12985, 12986, 12987, 12981, 12983, 12977, 12978, 
+12979, 12972, 12973, 12974, 12975, 12968, 12969, 12970, 12971, 12964, 12965, 12966, 12967, 12960, 
+12961, 12962, 12963, 12956, 12957, 12958, 12959, 12952, 12953, 12954, 12955, 12948, 12949, 12950, 
+12951, 12944, 12945, 12946, 12947, 12940, 12941, 12942, 12943, 12936, 12937, 12938, 12939, 12932, 
+12933, 12934, 12935, 12928, 12929, 12930, 12931, 12924, 12925, 12926, 12927, 12920, 12921, 12922, 
+12923, 12916, 12917, 12918, 13169, 13171, 12914, 12915, 12908, 12909, 12904, 12905, 13156, 12907, 
+13157, 12900, 13158, 12901, 13159, 12902, 12896, 12898, 13148, 12899, 13149, 12892, 13150, 13145, 
+12888, 12889, 13143, 13133, 12864, 13116, 12860, 12862, 13108, 12859, 13110, 13111, 13105, 13106, 
+12837, 13086, 13087, 13072, 13074, 13064 }
+
+bl.paths.icewynd = { 23187, 23189, 23190, 23146, 23145, 23144, 23143, 23140, 23139, 23138, 23137, 23136, 23135, 23132, 
+23131, 23130, 23129, 23128, 23127, 23126, 23125, 23124, 23123, 23191, 23121, 23120, 23118, 23117, 
+23116, 23115, 23114, 23113, 23110, 23109, 23108, 23107, 23106, 23097, 23096, 23095, 23094, 23093, 
+23092, 23192, 23091, 23090, 23089, 23087, 23080, 22985, 22960, 22959, 22931, 23088, 23321, 23077, 
+23312, 23308, 23294, 23284, 23280, 23276, 23271, 23267, 23264, 23259, 23256, 23255, 23331, 23254, 
+23253, 23252, 23251, 23250, 23249, 23248, 23247, 23246, 23245, 23244, 23243, 23242, 23241, 23238, 
+23237, 23235, 23234, 23233, 23232, 23231, 23230, 23229, 23333, 23228, 23227, 23226, 23225, 23224, 
+23223, 23222, 23221, 23220, 23219, 23218, 23216, 23214, 23213, 23212, 23211, 23202, 23201, 23200, 
+23340, 23345, 23199, 23198, 23175, 23174, 23173, 23171, 23168, 23166, 23165, 23112, 23111, 23105, 
+23104, 23103, 23102, 23101, 23350, 23307, 23185, 23184, 23183, 23182, 23181, 23180, 23179, 23178, 
+23177, 23164, 23163, 23162, 23851, 23870, 23878, 23880, 23881, 23882, 23890, 23927, 23782, 23912, 
+23924, 23923, 23922, 23921, 23160, 23159, 23158, 23157, 23156, 23193, 23194, 23195, 23196, 23197, 
+23155, 23154, 23153, 23152, 23151, 23150, 23149, 23148 }
+
+bl.paths.naga = { 1914, 5816, 5819, 5818, 5817, 5820, 10670, 10678, 10680, 10681, 10683, 10684, 10685, 10689, 10690,
+10672, 10679, 10692, 10693, 10694, 10695, 10696, 10697, 10698, 10699, 10929, 10936, 10935, 10934, 
+10937, 10938, 10939, 10941, 10701, 10702, 10703, 10704, 10705, 10706, 10708, 10710, 10712, 10711, 
+10715, 10713, 10714, 10716, 10719, 10717, 10720 }
+
+bl.paths.aslaran = { 6379, 6466, 6467, 6477, 6470, 6478, 6473, 6479, 6474, 6471, 6468, 6469, 6487, 6475, 6485, 6476, 
+6480, 6481, 6482, 6483, 6484}
+
+bl.paths.krokani = { 6435, 6459, 6436, 6387, 6438, 6437, 6454, 6439, 6455, 6456, 6457, 6458, 6440, 6441, 6442, 6444, 
+6443, 6453, 6238, 6240, 6241, 6239, 6242, 6364, 6365, 6243, 6244, 6245, 6246, 6247, 6248, 6249, 
+6250, 6251, 6252, 6253 }
+
+bl.paths.kryden = { 15825, 15570, 15578, 15832, 15609, 15048, 15831, 15838, 15839, 15844, 15031, 15027, 15840, 15842, 
+15627, 15874, 15829, 15862, 15214, 15847, 11667, 15827, 15867, 15859, 15854, 15853, 15646, 15655, 
+15821, 15540, 13818, 14979, 15705, 15687, 15700, 15699, 14043, 15675, 15684, 15569, 15707, 15708, 
+15113, 15681 }</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+		</ScriptGroup>
+	</ScriptPackage>
+	<KeyPackage />
+	<HelpPackage>
+		<helpURL></helpURL>
+	</HelpPackage>
+</MudletPackage>
