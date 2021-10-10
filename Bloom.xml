@@ -2924,7 +2924,7 @@ BLOOM RUN [&lt;path&gt;] : Run through the local area, or through a stored path.
                      Paths are stored in an internal script, as an unordered
                      List of rooms
 
-BLOOM RUN STOP : Cancel the run
+BLOOM STOP : Cancel the run
 
 BLOOM [HELP] : Bring up this menu.
 ]]
