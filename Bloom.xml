@@ -4557,7 +4557,9 @@ function bl.walker.autowalker:move()
   end
   bl.walker.autowalker.nextRoom = bl.walker.autowalker:closestRoom()
   if bl.walker.autowalker.nextRoom and bl.walker.autowalker.nextRoom ~= "" then
+    --first check if we can establish a path using the quickest possible method
     if getPath(mmp.currentroom, bl.walker.autowalker.nextRoom) then
+      --if it's a longish path, work in bixes.
       if #speedWalkPath &gt; 10 then
         raiseEvent("mmp link externals")
         getPath(mmp.currentroom, bl.walker.autowalker.nextRoom)
@@ -4566,6 +4568,7 @@ function bl.walker.autowalker:move()
       mmp.speedWalk.type = "room"
       doSpeedWalk()
     else
+      --if that first path failed, fall back on gotoRoom for more comprehensive pathing. This will also raise a failure event.
       mmp.gotoRoom(bl.walker.autowalker.nextRoom)
     end
   else
@@ -4654,15 +4657,35 @@ function bl.walker.autowalker:closestRoom()
   end
   -- fine, I'll brute force it.
   local distance = 99999
+  local failedRooms = {}
   for _, v in pairs(remainingRooms) do
     local ok, pathLength = getPath(bl.walker.autowalker.currentRoom, v)
-    if ok and pathLength &lt; distance then
-      distance = pathLength
-      roomID = v
-      if distance &lt;= 3 then
-        return roomID
+    if ok then
+      if pathLength &lt; distance then
+        distance = pathLength
+        roomID = v
+        if distance &lt;= 3 then
+          return roomID
+        end
+      end
+    else
+      failedRooms[#failedRooms + 1] = v
+    end
+  end
+  if not roomID and #failedRooms &gt; 0 then
+    raiseEvent("mmp link externals")
+    for _, v in pairs(failedRooms) do
+      local ok, pathLength = getPath(bl.walker.autowalker.currentRoom, v)
+      if ok and pathLength &lt; distance then
+        distance = pathLength
+        roomID = v
+        if distance &lt;= 3 then
+          raiseEvent("mmp clear externals")
+          return roomID
+        end
       end
     end
+    raiseEvent("mmp clear externals")
   end
   return roomID or ""
 end</script>
