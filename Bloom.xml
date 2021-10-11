@@ -577,8 +577,13 @@ bl.echo("Updated your buffs")</script>
 				</Trigger>
 				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 					<name>Finished influencing</name>
-					<script>bl.inf.influenced[bl.room.influenceables[1].mob.id] = os.clock()
-table.remove(bl.room.influenceables, 1)
+					<script>if tonumber(gmcp.Char.Vitals.esteem) &gt;= 250 and bl.inf.esteemItem then
+  bl.send("Imbue " .. bl.inf.esteemItem .. " with 250 esteem")
+end
+if bl.room.influenceables[1] then
+  bl.inf.influenced[bl.room.influenceables[1].mob.id] = os.clock()
+  table.remove(bl.room.influenceables, 1)
+end
 if
   (not bl.active or #bl.room.targets == 0) and
   (not bl.inf.active or #bl.room.influenceables == 0) and
@@ -2785,6 +2790,10 @@ bl.attacks =
 
 bl.inf.autoOil = true
 
+
+--item to automatically imbue with esteem once you hit 250. If you set it to false or nil, it should disable that functionality.
+
+bl.inf.esteemItem = "brazier"
 
 --when to check buffs. options are "login", "bashing on", or "never"
 bl.whenToCheckBuffs = "login"</script>
