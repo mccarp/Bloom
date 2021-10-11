@@ -3469,6 +3469,7 @@ function bl.act()
   --(and a very inconsistent, unreliable way to do a 'walking' basher, too)
   if
     mmp.autowalking or
+    bl.walker.moving or
     not (bl.active or bl.inf.active) or
     limited or
     not bl.bal.canAct() or
@@ -4546,16 +4547,12 @@ function bl.walker.autowalker:move()
   end
   bl.walker.autowalker.nextRoom = bl.walker.autowalker:closestRoom()
   if bl.walker.autowalker.nextRoom and bl.walker.autowalker.nextRoom ~= "" then
---    display(bl.walker.autowalker.nextRoom)
-
     if getPath(mmp.currentroom, bl.walker.autowalker.nextRoom) then
       mmp.speedWalk.type = "room"
       doSpeedWalk()
     else
       raiseEvent("mmapper failed path")
     end
-
---     mmp.gotoRoom(bl.walker.autowalker.nextRoom)
   else
     raiseEvent("bloomwalker.stop")
   end
@@ -4663,11 +4660,16 @@ end</script>
 bl = bl or {}
 bl.walker = bl.walker or {}
 bl.walker.active = bl.walker.active or false
+bl.walker.playerWhitelist = bl.walker.playerWhitelist or {}
 
 function bl.walker.run(path)
   bl.walker.autowalker.enabled = false
   bl.walker.active = true
   bl.echo("Started walking")
+  bl.walker.playerWhitelist = {}
+  for _, player in pairs(gmcp.Room.Players) do
+    table.insert(bl.walker.playerWhitelist,player.name)
+  end
   bl.walker.autowalker:init(bl.paths[path])
   if
     (not bl.active or #bl.room.targets == 0) and (not bl.inf.active or #bl.room.influenceables == 0)
@@ -4680,6 +4682,7 @@ end
 
 function bl.walker.walk()
   if bl.walker.active then
+    bl.walker.moving = true
     if gmcp.Room.Info.name == "Bottom of a sand pit" then
       setExit(gmcp.Room.Info.num, gmcp.Room.Info.exits.u or 5547, "up")
       raiseEvent("bloomwalker.move")
@@ -4701,6 +4704,7 @@ function bl.walker.walk()
 end
 
 function bl.walker.finished()
+  bl.walker.moving = false
   if bl.walker.active then
     bl.walker.active = false
     bl.echo("Path finished.")
@@ -4708,7 +4712,16 @@ function bl.walker.finished()
 end
 
 function bl.walker.arrived()
+  tempTimer(0, function()
+  bl.walker.moving = false
+  for _, player in pairs(gmcp.Room.Players) do
+  if not table.contains(bl.walker.playerWhitelist, player.name) then
+    bl.walker.walk()
+    return
+    end
+  end
   bl.act()
+  end)
 end
 
 function bl.walker.stop()
