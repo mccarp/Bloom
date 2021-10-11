@@ -2523,6 +2523,7 @@ bl.affs.printStamp("earache")</script>
 				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 					<name>Pulled into a pit</name>
 					<script>if bl.walker.active and mmp.autowalking then
+      bl.walker.moving = false
       mmp.stop()
       bl.act()
 end</script>
@@ -4668,7 +4669,7 @@ function bl.walker.run(path)
   bl.echo("Started walking")
   bl.walker.playerWhitelist = {}
   for _, player in pairs(gmcp.Room.Players) do
-    table.insert(bl.walker.playerWhitelist,player.name)
+    table.insert(bl.walker.playerWhitelist, player.name)
   end
   bl.walker.autowalker:init(bl.paths[path])
   if
@@ -4712,16 +4713,19 @@ function bl.walker.finished()
 end
 
 function bl.walker.arrived()
-  tempTimer(0, function()
-  bl.walker.moving = false
-  for _, player in pairs(gmcp.Room.Players) do
-  if not table.contains(bl.walker.playerWhitelist, player.name) then
-    bl.walker.walk()
-    return
+  tempTimer(
+    0,
+    function()
+      bl.walker.moving = false
+      for _, player in pairs(gmcp.Room.Players) do
+        if not table.contains(bl.walker.playerWhitelist, player.name) then
+          bl.walker.walk()
+          return
+        end
+      end
+      bl.act()
     end
-  end
-  bl.act()
-  end)
+  )
 end
 
 function bl.walker.stop()
