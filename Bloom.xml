@@ -4664,6 +4664,10 @@ bl.walker.active = bl.walker.active or false
 bl.walker.playerWhitelist = bl.walker.playerWhitelist or {}
 
 function bl.walker.run(path)
+  if not roomExists(gmcp.Room.Info.num) then
+    bl.echo("Sorry, looks like you're in an unmapped area :(")
+    return
+  end
   bl.walker.autowalker.enabled = false
   bl.walker.active = true
   bl.echo("Started walking")
