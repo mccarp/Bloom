@@ -4558,10 +4558,15 @@ function bl.walker.autowalker:move()
   bl.walker.autowalker.nextRoom = bl.walker.autowalker:closestRoom()
   if bl.walker.autowalker.nextRoom and bl.walker.autowalker.nextRoom ~= "" then
     if getPath(mmp.currentroom, bl.walker.autowalker.nextRoom) then
+      if #speedWalkPath &gt; 10 then
+        raiseEvent("mmp link externals")
+        getPath(mmp.currentroom, bl.walker.autowalker.nextRoom)
+        raiseEvent("mmp clear externals")
+      end
       mmp.speedWalk.type = "room"
       doSpeedWalk()
     else
-      raiseEvent("mmapper failed path")
+      mmp.gotoRoom(bl.walker.autowalker.nextRoom)
     end
   else
     raiseEvent("bloomwalker.stop")
