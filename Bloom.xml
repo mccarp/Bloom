@@ -2714,7 +2714,11 @@ bl.inf.newEntry = {
   bl.fakePrompt()
   bl.inf.active = true
   if bl.inf.hasAura then
-    bl.send("Charismaticaura on")
+    if bl.bal.canAct() then
+      bl.send("Charismaticaura on")
+    else
+      bl.send("Sm add free charismaticaura on")
+    end
   end
   bl.act()
 else
@@ -2722,7 +2726,11 @@ else
   bl.fakePrompt()
   bl.inf.active = false
   if bl.inf.hasAura then
-    bl.send("Charismaticaura off")
+    if bl.bal.canAct() then
+      bl.send("Charismaticaura off")
+    else
+      bl.send("Sm add free charismaticaura off")
+    end
   end
 end</script>
 					<command></command>
