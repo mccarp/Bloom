@@ -622,8 +622,10 @@ bl.inf.count = 0</script>
 						<string>^.+? breaks down and sobs, telling you how true it is that \w+ (is|are) nothing but a pathetic fraud\.$</string>
 						<string>^.+? drops down on \w+ knees and worships the very ground you walk on!$</string>
 						<string>^.+ wildly looks around, \w+ left eye suddenly developing a nervous twitch, and asks you to keep a look out for 'them'\.$</string>
+						<string>^.+ smiles at you condescendingly and pats your head\.$</string>
 					</regexCodeList>
 					<regexCodePropertyList>
+						<integer>1</integer>
 						<integer>1</integer>
 						<integer>1</integer>
 						<integer>1</integer>
