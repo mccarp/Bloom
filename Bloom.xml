@@ -59,6 +59,7 @@ end</script>
 			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>You died - Turn everything off</name>
 				<script>if gmcp.Char.Vitals.hp == "0" and not string.find(getCurrentLine(), "your own delusions") then
+  bl.affs.affs = {}
   bl.echo("Oh no, you're dead. Turning everything off.")
   bl.active = false
   bl.inf.active = false
@@ -2571,6 +2572,68 @@ end</script>
 				<packageName></packageName>
 				<regex>(?i)^bloom( help)?$</regex>
 			</Alias>
+			<Alias isActive="yes" isFolder="no">
+				<name>Bloom diagnose</name>
+				<script>bl.echo("Here's what might stop things from working:")
+local major, minor = getMudletVersion("Table")
+if major&lt;4 or (major &lt;= 4 and minor &lt; 11) then
+  bl.echo("You're on an earlier mudlet version than what this was built for, try updating to a more recent one.")
+end
+if not mmp then
+  bl.echo("You are missing mudlet mapper. Try downloading it")
+elseif not mmp.speedWalk then
+  bl.echo("You're on an older version of mmp missing a key feature - please update!")
+end
+for bal, state in pairs(bl.bal.bals) do
+  if not state then
+    bl.echo("We are missing the " .. bal .. " balance.")
+  end
+end
+if mmp.autowalking or bl.walker.moving then
+  bl.echo("System thinks you're autowalking - try BLOOM STOP?")
+end
+local badAffs =
+  {"entangled", "brokenleftleg", "brokenrightleg", "brokenleftarm", "brokenrightarm", "transfix"}
+for _, aff in pairs(badAffs) do
+  if bl.affs[aff] then
+    bl.echo("Bloom thinks you have " .. aff .. " - Try DIAGNOSE?")
+  end
+end
+if bl.affs.blind and not bl.defs.sixthsense then
+  bl.echo("Bloom thinks you're blind without sixthsense.")
+end
+if not bl.room.targets[1] then
+  bl.echo("I don't see any targets in room")
+end
+if not bl.room.influenceables[1] then
+  bl.echo("I don't see anything influenceable in room")
+end
+local allowableTypes =
+  {
+    typeless = 1,
+    blunt = 1,
+    cutting = 1,
+    magical = 1,
+    fire = 1,
+    cold = 1,
+    poison = 1,
+    asphyxiation = 1,
+    electricity = 1,
+    psychic = 1,
+    excorable = 1,
+    divinus = 1,
+  }
+for attack, types in pairs(bl.attacks) do
+  for damagetype in pairs(types) do
+    if not allowableTypes[damagetype] then
+      bl.echo("the attack '" .. attack .. "' has invalid damage type: " .. damagetype)
+    end
+  end
+end</script>
+				<command></command>
+				<packageName></packageName>
+				<regex>(?i)^bloom diag(nose)?$</regex>
+			</Alias>
 			<AliasGroup isActive="yes" isFolder="yes">
 				<name>Bashing</name>
 				<script></script>
@@ -2739,6 +2802,14 @@ end</script>
 					<packageName></packageName>
 					<regex>(?i)^bloom inf (on|off)$</regex>
 				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Toggle oils</name>
+					<script>bl.inf.autoOil = matches[2]:lower()=="on"
+bl.echo("Okay, we will "..(bl.inf.autoOil and "now" or "no longer") .." use influencing oils")</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>(?i)^bloom oils (on|off)$</regex>
+				</Alias>
 			</AliasGroup>
 			<AliasGroup isActive="yes" isFolder="yes">
 				<name>Bloom walker</name>
@@ -2901,7 +2972,7 @@ local bashingTitle = bl.c.title..[[
 ]]
 cecho(bashingTitle)
 local bashingAliases = [[
-BLOOM (ON|OFF) : Toggle bashing. To set your attacks, edit the 'Bloom Config' script.
+BLOOM (ON|OFF) : Toggle bashing. To set your attacks, edit the 'Bloom Config' script
 
 BLOOM ADD &lt;target&gt; [PRIO &lt;#&gt;] : probes a denizen or corpse and adds them to the hunting database
 BLOOM REVIEW [LOCAL|&lt;search&gt;] : Reviews and adjust the target list
@@ -2923,8 +2994,9 @@ local influenceAliases = [[
 BLOOM INF (ON|OFF) : Toggle Influencing
 
 BLOOM INF ADD &lt;target&gt; [EMPOWERING|CHARITY|SEDUCTION|WEAKENING|PARANOIA] : Add an influencing target
-BLOOM INF REVIEW [LOCAL|&lt;search&gt;] : Review and adjust the list of influencing targets.
-BLOOM INF CLEAR : Reset the table of influenced mobs if something goes wrong.
+BLOOM INF REVIEW [LOCAL|&lt;search&gt;] : Review and adjust the list of influencing targets
+BLOOM INF CLEAR : Reset the table of influenced mobs if something goes wrong
+BLOOM INF OILS (ON|OFF) : Toggles the use of influencing oils. Defaults to what is set in the config
 ]]
 
 cecho(bl.c.text..influenceAliases)
@@ -2940,7 +3012,9 @@ cecho(bl.c.title..otherTitle)
 
 local otherAliases = [[
 
-BLOOM RUN [&lt;path&gt;] : Run through the local area, or through a stored path.
+BLOOM DIAG[NOSE] : Checks a number of possible problems to help troubleshoot the system
+
+BLOOM RUN [&lt;path&gt;] : Run through the local area, or through a stored path
                      Paths are stored in an internal script, as an unordered
                      List of rooms
 
@@ -3890,8 +3964,11 @@ end</script>
   end
   --beast attack logic.
   if bl.beast.beastHere and gmcp.Char.Vitals.beastbal == "1" then
-    if bl.beast.list[bl.beast.beastHere].healing and (tonumber(gmcp.Char.Vitals.hp)/tonumber(gmcp.Char.Vitals.maxhp))&lt;.5 then
-    bl.send("Beast Order Heal Health")
+    if
+      bl.beast.list[bl.beast.beastHere].healing and
+      (tonumber(gmcp.Char.Vitals.hp) / tonumber(gmcp.Char.Vitals.maxhp)) &lt; .5
+    then
+      bl.send("Beast Order Heal Health")
     else
       local bestAttack, maxDamage = "", 0
       for attack, types in pairs(bl.beast.list[bl.beast.beastHere].attacks) do
@@ -3903,19 +3980,29 @@ end</script>
           maxDamage, bestAttack = damage, attack
         end
       end
-      bl.send("Beast Order " .. bestAttack .. " " .. target)
+      if bestAttack ~= "" then
+        bl.send("Beast Order " .. bestAttack .. " " .. target)
+      end
     end
   end
   --best attack maffs
   local bestAttack, maxDamage = "", 0
   for attack, types in pairs(bl.attacks) do
-    local damage = 0
-    for type, percent in pairs(types) do
-      damage = damage + targetData.data[type] * percent * bl.buffs[type]
+    --if there's a 4+ digit number in the attack, assumes it's an ID and checks to see if that ID is inventory.
+    local itemNum = string.match(attack, "%d%d%d%d+")
+    if not itemNum or bl.inv.inventory[itemNum] then
+      local damage = 0
+      for type, percent in pairs(types) do
+        damage = damage + targetData.data[type] * percent * bl.buffs[type]
+      end
+      if damage &gt; maxDamage then
+        maxDamage, bestAttack = damage, attack
+      end
     end
-    if damage &gt; maxDamage then
-      maxDamage, bestAttack = damage, attack
-    end
+  end
+  if bestAttack == "" then
+    bl.echo("Uh-oh. Something borked with attacks, and it didn't select one. ")
+    return false
   end
   bl.send(string.format(bestAttack, target))
   return true
@@ -4843,7 +4930,19 @@ bl.paths.krokani = { 6435, 6459, 6436, 6387, 6438, 6437, 6454, 6439, 6455, 6456,
 bl.paths.kryden = { 15825, 15570, 15578, 15832, 15609, 15048, 15831, 15838, 15839, 15844, 15031, 15027, 15840, 15842, 
 15627, 15874, 15829, 15862, 15214, 15847, 11667, 15827, 15867, 15859, 15854, 15853, 15646, 15655, 
 15821, 15540, 13818, 14979, 15705, 15687, 15700, 15699, 14043, 15675, 15684, 15569, 15707, 15708, 
-15113, 15681 }</script>
+15113, 15681 }
+
+bl.paths.trout = { 1764, 1765, 1766, 1767, 1768, 1763, 1762, 1761, 1760, 1759, 1756, 1755, 1754, 1753, 1752, 1751, 
+1750, 1749, 1748, 1747, 1746, 1745, 1744, 1743, 1742, 1741, 1740, 1739, 1738, 1737, 1736, 1735, 
+1716, 1715, 1714, 1713, 1717, 1718, 1719, 1720, 1721, 1722, 1723, 1724, 1725, 1726, 1727, 1728, 
+1729, 1730, 1731, 1732, 1733, 1734, 1710, 1709, 1708, 1707, 1706, 1705, 1704, 1703, 1702, 1701, 
+1700, 1699, 1698, 1697, 1696, 1695, 1694, 1693, 1692, 1691, 1690, 1689, 1688, 1687, 1686, 1685, 
+1684, 1883, 3810, 1882, 1881, 1880, 1879, 1878, 1877, 1876, 1875, 1874, 1873, 1872, 1871, 1870, 
+1869, 1868, 1867, 1866, 1865, 1864, 1863, 1862, 1861, 1860, 1859, 1832, 1831, 1830, 1829, 1828, 
+1827, 1826, 1825, 1824, 1823, 1822, 1821, 1833, 1834, 1835, 1836, 1837, 1838, 1839, 1840, 1841, 
+1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 
+1858, 11799, 11798, 11796, 11797, 11795, 11793, 11789, 11790, 11792, 11794, 11791, 11787, 11786, 
+12054, 11785, 11783, 11784, 13168, 13244 }</script>
 					<eventHandlerList />
 				</Script>
 			</ScriptGroup>
