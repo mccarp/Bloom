@@ -2575,8 +2575,7 @@ end</script>
 			<Alias isActive="yes" isFolder="no">
 				<name>Bloom diagnose</name>
 				<script>bl.echo("Here's what might stop things from working:")
-local major, minor = getMudletVersion("Table")
-if major&lt;4 or (major &lt;= 4 and minor &lt; 11) then
+if mudletOlderThan(4,11) then
   bl.echo("You're on an earlier mudlet version than what this was built for, try updating to a more recent one.")
 end
 if not mmp then
@@ -3275,7 +3274,7 @@ local function addToInfluence(item)
       db:add(bldb.influence, entry)
     end
     if
-      entry.active and
+      entry.active == "true" and
       (not bl.inf.influenced[item.id] or os.clock() &gt; (bl.inf.influenced[item.id] + 3630))
     then
       table.insert(bl.room.influenceables, {mob = item, data = entry})
