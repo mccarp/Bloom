@@ -3901,7 +3901,7 @@ local attackmap =
     ["Breathe Fire"] = {command = "Breathe Fire", types = {fire = 1}},
     ["Breathe Cold"] = {command = "Breathe Cold", types = {cold = 1}},
     ["Breathe Gas"] = {command = "Breathe Gas", types = {poison = 1}},
-    ["Breathe Psionicblast"] = {command = "Breathe Cold", types = {psychic = 1}},
+    ["Breathe Psionicblast"] = {command = "Breathe PsionicBlast", types = {psychic = 1}},
     ["Breathe Peppermint"] = {command = "Breathe Peppermint", types = {electricity = .66, asphyxiation = .66}},
     ["Breathe Soot"] = {command = "Breathe Soot", types = {poison = .66, asphyxiation = .66}},
     ["Breathe Divinus"] = {command = "Breathe Divinus", types = {divinus = 1}},
