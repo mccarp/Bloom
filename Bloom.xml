@@ -271,7 +271,7 @@ startingline = getLineNumber()-3
 						<colorTriggerFgColor>#000000</colorTriggerFgColor>
 						<colorTriggerBgColor>#000000</colorTriggerBgColor>
 						<regexCodeList>
-							<string>^\| (?&lt;name&gt;.+?) -+ #(?&lt;id&gt;\d+)\|$</string>
+							<string>^\| (?&lt;name&gt;.+?) -* #(?&lt;id&gt;\d+)\|$</string>
 							<string>| Sex    : </string>
 							<string>| Status : </string>
 							<string>^\| Fees   : .+Loyal To  : (?&lt;owner&gt;\w+) +\|$</string>
@@ -2758,7 +2758,7 @@ bl.inf.newEntry = {
 	active = "true",
 	alias = "",
 	mindset = "",
-	preferred = matches[3] or "",
+	preferred = matches[3]:lower() or "",
 }</script>
 					<command></command>
 					<packageName></packageName>
