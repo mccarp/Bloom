@@ -2661,7 +2661,7 @@ needs to probe the mob to add it. works on corpses. can accept things like 'blah
 
 
 enableTrigger("Bloom resistance capture")
-disableTimer = tempTimer(3, function() disableTrigger("Bloom resistance capture") end)
+tempTimer(3, function() disableTrigger("Bloom resistance capture") end)
 bl.newEntry =
   {
     areas = "," .. gmcp.Room.Info.area .. ",",
