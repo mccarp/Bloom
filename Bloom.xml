@@ -2807,7 +2807,7 @@ end</script>
 bl.echo("Okay, we will "..(bl.inf.autoOil and "now" or "no longer") .." use influencing oils")</script>
 					<command></command>
 					<packageName></packageName>
-					<regex>(?i)^bloom oils (on|off)$</regex>
+					<regex>(?i)^bloom(?: inf)? oils (on|off)$</regex>
 				</Alias>
 			</AliasGroup>
 			<AliasGroup isActive="yes" isFolder="yes">
