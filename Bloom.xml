@@ -205,10 +205,11 @@ end</script>
 					</Trigger>
 					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 						<name>Close capture</name>
-						<script>if not bl.debug then
+						<script>disableTrigger("Bloom resistance capture")
+if not bl.debug then
   bl.cleanup(bl.lastPrompt + 1, getLineNumber())
 end
-disableTrigger("Bloom resistance capture")
+
 if bl.newEntry.name ~= "" then
   bl.newEntry.aliases = "," .. matches[2]:gsub(" ", "") .. ","
   db:add(bldb.denizens, bl.newEntry)
@@ -734,9 +735,9 @@ local immunities =
     intimidating = "seduction",
   }
 bl.cleanup(bl.lastPrompt, getLineNumber())
+disableTrigger("Bloom Influence Capture")
 entry = bl.inf.newEntry
 entry.alias = "," .. matches[2]:gsub(" ", "") .. ","
-disableTrigger("Bloom Influence Capture")
 if entry.mindset ~= "" and entry.name ~= "" then
   if entry.preferred == "" or entry.preferred == immunities[entry.mindset] then
     entry.preferred = weaknesses[entry.mindset]
@@ -3168,7 +3169,7 @@ function bl.bal.updateBals()
     end
   end
   --invert the prone vitals, and have it as standing. Makes other logic easier.
-  bl.bal.bals.standing = gmcp.Char.Vitals.prone ~= "1"
+  bl.bal.bals.standing = (gmcp.Char.Vitals.prone ~= "1" or table.contains(gmcp.Room.Info.details, "the Dreamrealm"))
   --now we compare old and new balances to see what has changed.
   local regainedBalances = false
   for bal, val in pairs(bl.bal.bals) do
