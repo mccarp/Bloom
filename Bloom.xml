@@ -254,13 +254,14 @@ end</script>
 					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 						<name>Bloom Beast Capture</name>
 						<script>moveCursorEnd()
-bl.beast.newEntry = {
-name = multimatches[1].name,
-id = multimatches[1].id,
-owner = multimatches[2].owner,
-abilities = {},
-startingline = getLineNumber()-3
-}</script>
+bl.beast.newEntry =
+  {
+    name = multimatches[1].name,
+    id = multimatches[1].id,
+    owner = multimatches[2].owner,
+    abilities = {},
+    startingline = getLineNumber() - 3,
+  }</script>
 						<triggerType>0</triggerType>
 						<conditonLineDelta>4</conditonLineDelta>
 						<mStayOpen>40</mStayOpen>
@@ -2865,6 +2866,7 @@ bl.attacks =
     ["fire 334813 %s"] = {fire = 1},
     ["fire 417607 %s"] = {magical = 1},
     ["fire 219577 %s"] = {divinus = 1},
+    ["fire 279961 %s"] = {electricity = 1},
   }
   
 --simple toggle for whether or not to automatically use influence oils
@@ -4868,6 +4870,7 @@ function bl.walker.arrived()
 end
 
 function bl.walker.stop()
+  bl.walker.moving = false
   bl.walker.autowalker:stop()
   if mmp.autowalking then
     mmp.stop()
