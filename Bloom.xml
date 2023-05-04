@@ -4957,6 +4957,91 @@ bl.paths.trout = { 1764, 1765, 1766, 1767, 1768, 1763, 1762, 1761, 1760, 1759, 1
 12054, 11785, 11783, 11784, 13168, 13244 }</script>
 					<eventHandlerList />
 				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Kephera paths</name>
+					<packageName></packageName>
+					<script>bl = bl or {}
+bl.paths = bl.paths or {}
+
+
+-- Concatenate any number of tables together and return the result
+-- Does not modify any tables in-place
+local function TableConcat(...)
+  local t = {}
+  for _, table in ipairs(arg) do
+    for _, v in ipairs(table) do
+      t[#t+1] = v
+    end
+  end
+  return t
+end
+
+--These were built by Exeryte. Thank you!
+
+-- Kephera hive paths without queen rooms
+bl.paths.khementen = { 12230, 12231, 12232, 12233, 12234, 12235, 12236, 12237, 12238,
+12239, 12241, 12242, 12243, 12244, 12245, 12246, 12240 }
+bl.paths.tutotophet = { 12208, 12209, 12210, 12211, 12212, 12213, 12214, 12215, 12216,
+12217, 12218, 12219, 12220, 12221, 12222, 12223, 12224, 12225, 12226, 12228, 12227 }
+bl.paths.sethetmun = { 12186, 12187, 12188, 12189, 12190, 12191, 12192, 12193, 12194,
+12195, 12196, 12197, 12199, 12200, 12201, 12204, 12206, 12207, 12203 }
+bl.paths.rashepera = { 9049, 9091, 9574, 9578, 11925, 11928, 11932, 12145, 12154, 12155,
+12156, 12157, 12178, 12179, 12180, 12181, 12182, 12183, 9881 }
+bl.paths.mumhatuti = { 12158, 12159, 12160, 12161, 12162, 12163, 12164, 12165, 12166,
+12167, 12168, 12169, 12170, 12171, 12172, 12173, 12175, 12176, 12174 }
+bl.paths.akhari = { 12251, 12252, 12253, 12254, 12255, 12397, 12398, 12403, 12408,
+12412, 12418, 12425, 12434, 12440, 12453, 12464, 12471, 12478, 12488, 12494, 12500,
+12507, 12515, 12523, 12530, 12536, 12542, 12549, 12556, 12562, 12568, 12575, 12582,
+12589, 12596, 12602, 12483 }
+bl.paths.mastercomplex = { 12982, 12989, 12996, 13004, 13012, 13019, 13026, 13041, 13047,
+13052, 13057, 13062, 13068, 13073, 13075, 13080, 13085, 13088, 13090, 13096,
+13101, 13107, 13115, 13123, 13127, 13128, 13134, 13142, 13147, 13154, 13162,
+13170, 13177, 13858, 13863, 13034 }
+bl.paths.imhohet = { 12256, 12257, 12258, 12259, 12260, 12261, 12262, 12263, 12264,
+12265, 12266, 12267, 12268, 12269, 12270, 12271, 12272, 12273, 12274, 12275, 12277,
+12278, 12279, 12280, 12281, 12282, 12283, 12284, 12286, 12287, 12288, 12289, 12290,
+12291, 13923, 12285 }
+bl.paths.neferti = { 12292, 12293, 12294, 12295, 12296, 12297, 12298, 12300, 12301,
+12302, 12303, 12304, 12305, 12306, 12307, 12308, 12309, 12310, 12311, 12312, 12313,
+12314, 12315, 12316, 12317, 12318, 12320, 12321, 12322, 12323, 12324, 12325, 12326,
+12327, 12328, 12329, 12330, 12331, 12332, 12333, 12334, 12335, 12336, 12337, 12338,
+12339, 12340, 12341, 12342, 12343, 12344, 12345, 12346, 12347, 12348, 12349, 12350,
+12351, 12352, 12353, 12354, 12357, 12358, 12359, 12360, 12361, 12362, 12363, 12364,
+12365, 12319 }
+
+-- Kephera queen rooms
+local kepheraQueens = {
+12248, 12640, 12616, 12633, 12620, 12249, 12626, 12609, 12250, -- Akhari
+13185, -- Master Complex
+12247, -- Khementen
+12229, -- Tutotophet
+12202, -- Sethetmun
+12184, 12185, -- Rashepera
+12355, -- Neferti
+-- Nothing for Imhohet, let the attendant live
+12177 -- Mumhatuti
+}
+
+-- All kephera, no queen rooms
+bl.paths.kephera = TableConcat(
+  bl.paths.khementen,
+  bl.paths.tutotophet,
+  bl.paths.sethetmun,
+  bl.paths.rashepera,
+  bl.paths.mumhatuti,
+  bl.paths.akhari,
+  bl.paths.mastercomplex,
+  bl.paths.imhohet,
+  bl.paths.neferti
+)
+
+-- All kephera + queen rooms
+bl.paths.kepherafull = TableConcat(
+  bl.paths.kephera,
+  kepheraQueens
+)</script>
+					<eventHandlerList />
+				</Script>
 			</ScriptGroup>
 		</ScriptGroup>
 	</ScriptPackage>
